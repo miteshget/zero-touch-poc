@@ -1,0 +1,21 @@
+
+= Learning References
+:navtitle: _Learning References_
+
+* *_Product Pages_*:
+** https://www.redhat.com/en/technologies/management/ansible[_Red Hat Ansible Automation Platform_,window=_blank]
+** https://www.redhat.com/en/technologies/management/ansible/event-driven-ansible[_Red Hat Event-driven Ansible_,window=_blank]
+** https://developers.redhat.com/learn?ref=webconsole[_Red Hat OpenShift_,window=_blank]
+** https://developers.redhat.com/topics/kafka-kubernetes[_Apache Kafka on Kubernetes_,window=_blank]
+** https://www.redhat.com/en/resources/amq-streams-datasheet[_Red Hat AMQ Streams_,window=_blank]
+
+* *_Reference Articles_*:
+** https://medium.com/@miteshget/event-driven-ansible-the-simple-way-to-automate-your-it-processes-3f7bfa57cb9e[_Event-Driven Automation_,window=_blank]
+** https://medium.com/@ritz.shah/rocket-chat-setup-configuration-and-working-in-an-openshift-k8s-environment-3b418a3e48c7[_Rocket Chat Setup Configuration and Working in an OpenShift_,window=_blank]
+** https://redhat-solution-patterns.github.io/solution-pattern-sentiment-analysis/solution-pattern-sentiment-analysis/index.html[_Solution Patterns: Event-Driven Sentiment Analysis with Kafka and AI/ML_,window=_blank]
+
+* *_Learning Videos_*:
+** https://www.youtube.com/watch?v=Bt2tZB_5F2U&list=PLdu06OJoEf2a3fFl6uaoyGV526ilwD97R[_Event-driven Ansible_,window=_blank]
+** https://www.youtube.com/watch?v=6MjYPrlOiQA[_Event-driven Ansible and Lightspeed_,window=_blank]
+** https://www.youtube.com/watch?v=1mj_nfgY40E&t=209s[_OpenShift + Ansible: Event-Driven PVC Snapshots Made Easy_,window=_blank]
+** https://www.youtube.com/watch?v=yfXcGB7l0II[_Ansible Lightspeed with IBM Watson Code Assistant_,window=_blank]

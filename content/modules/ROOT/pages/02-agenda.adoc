@@ -1,0 +1,8 @@
+:icons: font
+
+= Agenda
+:navtitle: 2: Agenda
+
+* *Workshop Introduction*
+* *Hands-On Session: Solution Addressing The Challenges*
+* *Challenge Lab (Optional)*

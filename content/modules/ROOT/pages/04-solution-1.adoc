@@ -1,0 +1,150 @@
+= Solution Addressing The Challenges
+:navtitle: 1: Product Manager - Monitoring System
+:numbered:
+
+
+== Addressing Challenge: 
+
+The Product Manager seamlessly integrates customer feedback from the live online retail e-commerce website into the chat monitoring system, enabling timely and proactive responses
+
+
+== Solution:
+
+. Sign in to the Smart Retail Application using the credentials for user 'asilva' to submit feedback for the clothing product, adhering to the details provided below:
+
++
+****
+[upperalpha]
+
+.. Find the login details for accessing Smart Retail Application below:
+... *Web Url:* https://globex-web-sentiment-analysis.{openshift_cluster_ingress_domain}[window=_blank]
+... *Username:* asilva
+... *Password:* openshift
+
++
+.Smart Retails Main Page
+image::01_coolstore_login.jpg[login, 640]
+
++
+.Smart Retails Login Page
+image::01_coolstore_login_creds.jpg[login, 640]
+****
+
+
+. You have the option to share feedback for the Smart Retail Application product, following the details provided below:
+
++
+****
+[upperalpha]
+
+.. Click on `Coolstore` tab from the top.
++
+.Smart Retails Home Page
+image::01_coolstore_feedback-1.jpg[Review, 640]
+
+.. Click on `QUARKUS T-SHIRT`.
++
+.Smart Retails Products Page
+image::01_coolstore_feedback-2.jpg[Review, 640]
+
+.. Type something good as feedback in the review box then click `Submit Review` button.
++
+.Smart Retails Review Page
+image::01_coolstore_feedback-3.jpg[Review, 640]
+****
+
+
+. Access the Event-driven Ansible console to observe the seamless triggering of the Ansible Controller Job Template upon submitting feedback in the Smart Retail Application. Refer to the details provided below for a comprehensive view of this process:
+
++
+****
+[upperalpha]
+
+.. Find the login details for accessing Event-driven Ansible below:
+... *Event-driven Ansible:* {eda_controller_web_url}[window=_blank]
+... *Username:* {eda_controller_admin_user}
+... *Password:* {eda_controller_admin_password}
++
+.Event-driven Ansible Login Page
+image::03_eda_login.jpg[Event-driven Ansible, 400]
+
+.. Navigate to 'Rulebook Activations' and observe that the 'push-favourable-feedback' Fire count has increased by 1. This indicates the successful triggering of the specified rulebook activation. Your attention to this metric is crucial for monitoring the feedback integration process effectively.
++
+.Event-driven Ansible Rulebook Activations Page
+image::03_eda_favourable_trigger.jpg[Event-driven Ansible, 640]
+
+.. Access 'push-favourable-feedback' rulebook activations, then click on 'History' to review the log history and obtain a detailed list of activities and events. This will provide valuable insights into the execution and outcomes associated with this rulebook activation.
++
+.Event-driven Ansible Rulebook Activations History Page
+image::03_eda_favourable_trigger_history-1.jpg[Event-driven Ansible, 640]
+
+.. Select the latest entry 'X - push-favourable-feedback' to access and review the triggered logs. Take a moment to observe the log details, as they provide valuable information about the events and actions initiated during the execution of this rulebook activation.
++
+.Event-driven Ansible Rulebook Activations History Logs
+image::03_eda_favourable_trigger_history-2.jpg[Event-driven Ansible, 640]
+
+****
+
+
+. Log in to the Automation Controller to observe the job triggered by Event-driven Ansible upon submitting feedback. The Automation Controller job is designed to post formatted feedback in RocketChat. This feature ensures that the product manager can efficiently monitor feedback and take timely actions as needed. Refer to the details provided below for a comprehensive overview of this integration process.
+
++
+****
+[upperalpha]
+
+.. Find the login details for accessing Automation Controller below:
+... *Automation Controller:* {aap_controller_web_url}[window=_blank]
+... *Username:* {aap_controller_admin_user}
+... *Password:* {aap_controller_admin_password}
+
++
+.Automation Controller Login Page
+image::04_controller_login-1.jpg[Automation_Controller,350]
+
+.. Navigate to 'Jobs' and observe the latest executed job, identified as 'X - push-favourable-feedback.' This allows you to review the details of the most recent execution, providing insights into the actions taken as a result of the triggered event.
++
+.Automation Controller Jobs Page
+image::04_controller_job-1.jpg[Automation_Controller,640]
+
+.. Select 'X - push-favourable-feedback' to view and analyze the logs associated with this specific job. By examining the logs, you can gain a deeper understanding of the processes and actions carried out during the execution of this particular task.
++
+.Automation Controller Jobs Details
+image::04_controller_job-2.jpg[Automation_Controller,640]
+
+****
+
+. Access the RocketChat monitoring system to view the latest message posted by the Automation Controller. The details are provided below, offering insights into the formatted feedback generated by the system:
+
+* Message Source: Smart Retail Application
+* Message Triggered by: Event-driven Ansible
+* Message Posted by: Automation Controller
+* Content: [_USER SENTIMENT: positive, PRODUCT_CATEGORY: clothing, PRODUCT_ID: 329299, PRODUCT_NAME: Quarkus T-shirt, USER NAME: Addison Silva, REGION: USA, REVIEW: This good product, SCORE: 2_]
+
++
+This allows for convenient monitoring by the product manager, facilitating timely actions based on the received feedback.
+
++
+****
+[upperalpha]
+
+.. Find the login details for accessing RocketChat below:
+... *RocketChat Url:* {rocketchat_url}[window=_blank]
+... *Username:* pm_clothing
+... *Password:* {rocketchat_admin_password}
+
++
+.RocketChat Login page
+image::05_rocketchat_login-1.jpg[Rocketchat, 640]
+
+.. Navigate to the #clothing channel and review the new message that contains the original feedback, along with additional product details. This comprehensive information is designed to assist the product manager in monitoring the products effectively. Insights provided in the message contribute to informed decision-making and proactive actions based on customer feedback.
++
+.RocketChat Channels
+image::05_rocketchat_login-2.jpg[Rocketchat, 640]
+
+****
+
+== Summary:
+
+In summary, the Product Manager adeptly integrates customer feedback from the live online retail e-commerce website into the chat monitoring system, fostering a seamless process for timely and proactive responses. This harmonized approach ensures a dynamic and customer-focused engagement strategy.
+
+*Kindly proceed to the next page as we delve into the seamless integration of the ChatOps system with Event-Driven Ansible.* 

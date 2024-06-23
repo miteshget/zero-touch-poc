@@ -1,10 +1,30 @@
-Welcome to this open lab experience for Red Hat Enterprise Linux.
 
-The system displayed beside this text is a Red Hat Enterprise Linux 9
-system registered with Subscription Manager. An unprivileged user also
-exists on the system.
+= {lab_name}
+:navtitle: 1: Getting Started
 
-Username: *rhel* Password: *redhat*
+== Workshop Overview
 
-Enjoy your unstructured lab time, the system will disconnect after about
-60 minutes.
+This AI-based smart retail solution features a scalable and efficient architecture designed to capture and respond to events, facilitating swift decision-making by product managers through streamlined operations like ChatOps. Leveraging link:https://www.redhat.com/en/technologies/management/ansible/event-driven-ansible[Event-driven Ansible,window=_blank], the system seamlessly connects and consumes data from various systems and services, responding to triggering events.
+
+The integration of link:https://www.redhat.com/en/technologies/management/ansible/event-driven-ansible[Event-driven Ansible,window=_blank] with Red Hat AMQ Streams and ChatOps exemplifies how this architecture can construct an intelligent system, driving valuable business insights through an event-driven workflow. This cohesive approach enhances the agility of operational actions, empowering business teams with the ability to respond effectively to dynamic retail scenarios.
+
+
+== Use Cases
+This architecture is well-suited for addressing a variety of common use cases, including:
+
+. *Machine Learning and Real-Time Analytics:*
+* Utilize the framework for implementing machine learning and real-time analytics to enhance business intelligence, providing valuable insights for strategic decision-making.
+
+. *Real-Time Events from End-User Feedback:*
+* Capture and respond to real-time events generated from end-user feedback, enabling enhanced product analysis and management with a focus on immediate customer needs and preferences.
+
+. *Real-Time System Interaction through Chat Ops:*
+* Enable real-time interaction with the system through user-friendly ChatOps mechanisms. This approach simplifies communication and operational commands, fostering a dynamic and responsive system.
+
+. *Event-Driven Ansible with Intelligent Applications, Kafka, and ChatOps:*
+* Leverage the power of Event-Driven Ansible in combination with intelligent applications, Kafka, and ChatOps to create a robust and interconnected system. This integration ensures efficient handling of events and seamless communication across different components.
+
+. *Sentiment Analysis:*
+* Implement sentiment analysis to gauge customer sentiments effectively. By analyzing feedback and interactions in real time, businesses can adapt and respond to changing sentiments, enhancing customer satisfaction.
+
+These use cases showcase the versatility of the architecture, demonstrating its applicability across diverse scenarios for driving business innovation and intelligence.
