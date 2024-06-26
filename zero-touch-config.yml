@@ -16,6 +16,7 @@ antora:
       label: Module 5
     - name: 06-solution-3
       label: Module 6
+
 tabs:
   - name: terminal
     port: 443
@@ -23,6 +24,5 @@ tabs:
   - name: editor
     port: 443
     path: /codeserver/
-  - name: vscode
-    url: https://localhost:8443
+
   
