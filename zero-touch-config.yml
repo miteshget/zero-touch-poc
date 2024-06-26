@@ -4,9 +4,9 @@ antora:
   name: modules
   dir: www
   modules:
-    - name: module_1
+    - name: index
       label: Module 1
-    - name: module-02
+    - name: 02-agenda
       label: Module 2
 tabs:
   - name: terminal
