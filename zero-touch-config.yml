@@ -24,6 +24,8 @@ tabs:
   - name: terminal
     port: 443
     path: /tty1
-
+  - name: VScode
+    port: 8443
+    path: /?folder=/home/coder/workplace
 
   
