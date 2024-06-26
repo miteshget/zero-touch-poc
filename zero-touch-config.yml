@@ -18,15 +18,14 @@ antora:
       label: Module 6
 
 tabs:
-  # - name: editor
-  #   port: 443
-  #   path: /codeserver/?folder=/home/coder/workplace
-  - name: VScode
+  - name: VSCode Editor
     port: 8443
     path: /?folder=/home/rhel/
-  - name: terminal
+  - name: ">_control"
     port: 443
     path: /tty1
 
-
+  # - name: editor
+  #   port: 443
+  #   path: /codeserver/?folder=/home/coder/workplace
   
