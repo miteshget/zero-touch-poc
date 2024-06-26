@@ -12,8 +12,6 @@ tabs:
   - name: terminal
     port: 443
     path: /tty1
-  - name: Editor
+  - name: editor
     port: 443
     path: /codeserver/
-  - name: Myweb
-    url: https://www.redhat.com
