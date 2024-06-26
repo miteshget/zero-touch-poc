@@ -18,14 +18,12 @@ antora:
       label: Module 6
 
 tabs:
+  - name: editor
+    port: 443
+    path: /codeserver/?folder=/home/coder/workplace
   - name: terminal
     port: 443
     path: /tty1
-  - name: editor
-    port: 443
-    path: /codeserver/
-  - name: vscode
-    url: https://redhat.com
-  - name: Vscodelocal
-    url: https://localhost:8443
+
+
   
