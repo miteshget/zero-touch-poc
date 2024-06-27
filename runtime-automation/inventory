@@ -1,7 +1,8 @@
-[local]
-localhost
+control
+node1
+node2
+node3
 
-[local:vars]
-ansible_connection = local
-
-
+[all:vars]
+ansible_user = rhel
+ansible_password = 

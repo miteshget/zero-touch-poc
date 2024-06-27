@@ -1,8 +1,8 @@
 ---
 - name: Demo Playbook for the ansible-runner API
-  hosts: all
+  hosts: localhost
   gather_facts: false
-  become: false
+  become: true
   vars:
 
   tasks:
@@ -16,20 +16,35 @@
         msg: "module_stage not defined"
       when: module_stage is not defined
 
-    - name: Check if module_01/setup.sh exists
+    - name: Check if {{ module_dir }}/control/{{ module_stage }} exists
       ansible.builtin.stat:
-        path: "./{{ module_dir }}/{{ module_stage }}.sh"
-      register: r_script_test
+        path: ./{{ module_dir }}/control/{{ module_stage }}.sh
+      register: r_control_script
 
+    - name: Check if {{ module_dir }}/node1/{{ module_stage }} exists
+      ansible.builtin.stat:
+        path: ./{{ module_dir }}/node1/{{ module_stage }}.sh
+      register: r_node1_script
+
+    - name: Check if {{ module_dir }}/node2/{{ module_stage }} exists
+      ansible.builtin.stat:
+        path: ./{{ module_dir }}/node2/{{ module_stage }}.sh
+      register: r_node2_script
+
+    - name: Check if {{ module_dir }}/node3/{{ module_stage }} exists
+      ansible.builtin.stat:
+        path: ./{{ module_dir }}/node3/{{ module_stage }}.sh
+      register: r_node3_script
+
+- hosts: control_nodes
+  gather_facts: false
+  tasks:
     - name: Execute setup.sh if it exists
-      when: r_script_test.stat.exists
-      command: "bash ./{{ module_dir }}/{{ module_stage }}.sh"
+      when: hostvars.localhost.r_control_script.stat.exists
+      ansible.builtin.script:
+        cmd:  ./{{ module_dir }}/control/{{ module_stage }}.sh
       ignore_errors: true
       register: r_result
-
-    # - name: Pause for 10 seconds to imitate long running task
-    #   ansible.builtin.pause:
-    #     seconds: 30
 
     - name: Write script result to file
       ansible.builtin.copy:

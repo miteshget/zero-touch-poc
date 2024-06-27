@@ -1,1 +1,0 @@
-touch /home/rhel/agenda.yaml

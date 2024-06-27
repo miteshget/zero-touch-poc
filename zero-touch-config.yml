@@ -4,7 +4,7 @@ antora:
   name: modules
   dir: www
   modules:
-    - name: index
+    - name: 01-index
       label: Module 1
     - name: 02-agenda
       label: Module 2
