@@ -3,8 +3,6 @@
   hosts: localhost
   gather_facts: false
   become: true
-  vars:
-
   tasks:
     - name: Check if module_dir is defined
       ansible.builtin.fail:
@@ -16,47 +14,60 @@
         msg: "module_stage not defined"
       when: module_stage is not defined
 
-    - name: Check if {{ module_dir }}/control/{{ module_stage }} exists
+    - name: Check if module_dir and module_stage exists
       ansible.builtin.stat:
-        path: ./{{ module_dir }}/control/{{ module_stage }}.sh
-      register: r_control_script
+        path: ./{{ module_dir }}/{{ item }}/{{ module_stage }}.sh
+      register: r_script
+      loop: "{{ groups['all'] }}"
 
-    - name: Check if {{ module_dir }}/node1/{{ module_stage }} exists
-      ansible.builtin.stat:
-        path: ./{{ module_dir }}/node1/{{ module_stage }}.sh
-      register: r_node1_script
-
-    - name: Check if {{ module_dir }}/node2/{{ module_stage }} exists
-      ansible.builtin.stat:
-        path: ./{{ module_dir }}/node2/{{ module_stage }}.sh
-      register: r_node2_script
-
-    - name: Check if {{ module_dir }}/node3/{{ module_stage }} exists
-      ansible.builtin.stat:
-        path: ./{{ module_dir }}/node3/{{ module_stage }}.sh
-      register: r_node3_script
-
-- hosts: control_nodes
+- name: Run on control node
+  hosts: control
   gather_facts: false
+  become: true
   tasks:
-    - name: Execute setup.sh if it exists
-      when: hostvars.localhost.r_control_script.stat.exists
-      ansible.builtin.script:
-        cmd:  ./{{ module_dir }}/control/{{ module_stage }}.sh
-      ignore_errors: true
-      register: r_result
+    - name: Include tasks
+      ansible.builtin.include_tasks:
+        file: tasks.yml
+      when:
+        - item.stat.exists
+        - item.item == 'control'
+      loop: "{{ hostvars.localhost.r_script.results }}"
 
-    - name: Write script result to file
-      ansible.builtin.copy:
-        content: "{{ r_result.stdout }}"
-        dest: "{{ job_info_dir }}/script.out"
-      when: r_result is defined and job_info_dir is defined
+- name: Run on node1
+  hosts: node1
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Include tasks
+      ansible.builtin.include_tasks:
+        file: tasks.yml
+      when:
+        - item.stat.exists
+        - item.item == 'node1'
+      loop: "{{ hostvars.localhost.r_script.results }}"
 
-    - name: Output script result
-      ansible.builtin.debug:
-        var: r_result
+- name: Run on node2
+  hosts: node2
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Include tasks
+      ansible.builtin.include_tasks:
+        file: tasks.yml
+      when:
+        - item.stat.exists
+        - item.item == 'node2'
+      loop: "{{ hostvars.localhost.r_script.results }}"
 
-    - name: Fail if stage was failed
-      ansible.builtin.fail:
-        msg: "Stage failed"
-      when: r_result.rc != 0
+- name: Run on node3
+  hosts: node3
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Include tasks
+      ansible.builtin.include_tasks:
+        file: tasks.yml
+      when:
+        - item.stat.exists
+        - item.item == 'node3'
+      loop: "{{ hostvars.localhost.r_script.results }}"

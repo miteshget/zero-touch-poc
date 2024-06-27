@@ -1,0 +1,20 @@
+---
+- name: Execute setup.sh
+  ansible.builtin.script:
+    cmd: ./{{ module_dir }}/{{ item.item }}/{{ module_stage }}.sh
+  register: r_result
+
+- name: Write script result to file
+  ansible.builtin.copy:
+    content: "{{ r_result.stdout }}"
+    dest: "{{ job_info_dir }}/script.out"
+  when: r_result is defined and job_info_dir is defined
+
+- name: Output script result
+  ansible.builtin.debug:
+    var: r_result
+
+- name: Fail if stage fails
+  ansible.builtin.fail:
+    msg: "Stage failed"
+  when: r_result.rc != 0
