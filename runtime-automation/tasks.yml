@@ -9,6 +9,7 @@
     content: "{{ r_result.stdout }}"
     dest: "{{ job_info_dir }}/script.out"
   when: r_result is defined and job_info_dir is defined
+  delegate_to: localhost
 
 - name: Output script result
   ansible.builtin.debug:
