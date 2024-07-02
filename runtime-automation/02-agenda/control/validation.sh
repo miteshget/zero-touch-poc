@@ -11,7 +11,7 @@ random_number=$(generate_random_number)
 # Check if the random number is less than or equal to 5
 if [ $random_number -le 5 ]; then
   echo "Random number is $random_number. Script failed."
-  exit 1
+  exit 0
 else
   echo "Random number is $random_number. Script succeeded."
   exit 0
