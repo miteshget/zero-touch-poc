@@ -5,4 +5,3 @@ node3
 
 [all:vars]
 ansible_user = rhel
-ansible_password = 
