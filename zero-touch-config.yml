@@ -9,14 +9,19 @@ antora:
       solveButton: true
     - name: 02-agenda
       label: Module 2
+      solveButton: true
     - name: 03-introduction
       label: Module 3
+      solveButton: true
     - name: 04-solution-1
       label: Module 4
+      solveButton: true
     - name: 05-solution-2
       label: Module 5
+      solveButton: true
     - name: 06-solution-3
       label: Module 6
+      solveButton: true
 
 tabs:
   - name: VSCode Editor
