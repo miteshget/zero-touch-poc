@@ -6,6 +6,7 @@ antora:
   modules:
     - name: 01-index
       label: Module 1
+      solveButton: true
     - name: 02-agenda
       label: Module 2
     - name: 03-introduction
