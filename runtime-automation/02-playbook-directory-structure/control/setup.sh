@@ -1,13 +1,15 @@
-mkdir /home/rhel/ansible-files
-chown -R rhel:rhel /home/rhel/ansible-files
-touch /etc/sudoers.d/rhel_sudoers
-echo "%rhel ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/rhel_sudoers
-cp -a /root/.ssh/* /home/rhel/.ssh/.
-chown -R rhel:rhel /home/rhel/.ssh
-git config --global user.email "rhel@example.com"
-git config --global user.name "Red Hat"
-echo "[defaults]" > /home/rhel/.ansible.cfg
-echo "inventory = /home/rhel/ansible-files/hosts" >> /home/rhel/.ansible.cfg
-echo "host_key_checking = False" >> /home/rhel/.ansible.cfg
-cp /home/rhel/ansible-navigator.yml /home/rhel/.ansible-navigator.yml
-mv /home/rhel/ansible-navigator.yml /home/rhel/ansible-files/ansible-navigator.yml
+#!/bin/bash
+
+USER=rhel
+
+# Set the target directory and file
+target_directory="/home/rhel/ansible-files"
+target_file="${target_directory}/inventory"
+solve_file="/tmp/first-101/solve_10_inventory"
+
+# Make sure solvers exist
+/usr/bin/git clone https://github.com/leogallego/instruqt-wyfp-2024-solve.git /tmp/first-101
+
+# Copy solved playbook
+cp $solve_file $target_file
+chown -R $USER:$USER $target_directory 

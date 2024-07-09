@@ -12,9 +12,9 @@ solve_file="/tmp/first-101/solve_11_system_setup.yml"
 
 # Copy solved playbook
 cp $solve_file $target_file
-chown $USER:$USER -R $target_directory
+chown $USER:$USER $target_file 
 
 # Run solve playbook
-#su - $USER -c 'ansible-navigator run /tmp/first-101/solve_11_system_setup.yml -m stdout'
-#cd $target_directory
-#ansible-navigator run $target_file -m stdout
+#su - $USER -c 'ansible-navigator run system_setup.yml -m stdout'
+cd $target_directory
+ansible-navigator run $target_file -m stdout

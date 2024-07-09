@@ -1,1 +1,1 @@
-echo hello from setup.sh
+#!/bin/bash

@@ -1,1 +1,1 @@
-touch /home/rhel/introduction.yml
+#!/bin/bash
