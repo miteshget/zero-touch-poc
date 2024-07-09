@@ -23,10 +23,10 @@ chown $USER:$USER $target_file
 ## Set the working directory
 ## Define the desired hosts file content
 ## Write the desired content to the 'hosts' file
-#su - $USER -c 'cat >/home/rhel/ansible-files/hosts <<EOL
-#[web]
-#node1
-#node2
-#
-#EOL
-#cat /home/rhel/ansible-files/hosts'
+su - $USER -c 'cat >/home/rhel/ansible-files/hosts <<EOL
+[web]
+node1
+node2
+
+EOL
+cat /home/rhel/ansible-files/hosts'
