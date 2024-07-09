@@ -1,7 +1,7 @@
 
 = {lab_name}
 :navtitle: 1: Getting Started
-
+maza aaya
 == Workshop Overview
 
 This AI-based smart retail solution features a scalable and efficient architecture designed to capture and respond to events, facilitating swift decision-making by product managers through streamlined operations like ChatOps. Leveraging link:https://www.redhat.com/en/technologies/management/ansible/event-driven-ansible[Event-driven Ansible,window=_blank], the system seamlessly connects and consumes data from various systems and services, responding to triggering events.
