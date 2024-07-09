@@ -4,23 +4,35 @@ antora:
   name: modules
   dir: www
   modules:
-    - name: 01-index
-      label: Module 1
+    - name: 01-playbook-inventory
+      label: Playbook Inventory
       solveButton: true
-    - name: 02-agenda
-      label: Module 2
+    - name: 02-playbook-directory-structure
+      label: Playbook Directory Structure
       solveButton: true
-    - name: 03-introduction
-      label: Module 3
+    - name: 03-playbook-run-it
+      label: Playbook Run it
       solveButton: true
-    - name: 04-solution-1
-      label: Module 4
+    - name: 04-playbook-multi-node
+      label: Playbook Multi Node
       solveButton: true
-    - name: 05-solution-2
-      label: Module 5
+    - name: 05-playbook-variables
+      label: Playbook Variables
       solveButton: true
-    - name: 06-solution-3
-      label: Module 6
+    - name: 06-playbook-conditionals
+      label: Playbook Conditionals
+      solveButton: true
+    - name: 07-handlers
+      label: Handlers
+      solveButton: true
+    - name: 08-playbook-loops
+      label: Playbook Loops
+      solveButton: true
+    - name: 09-playbook-templates
+      label: Playbook Templates
+      solveButton: true
+    - name: 10-roles
+      label: Roles
       solveButton: true
 
 tabs:
@@ -30,8 +42,4 @@ tabs:
   - name: ">_control"
     port: 443
     path: /tty1
-
-  # - name: editor
-  #   port: 443
-  #   path: /codeserver/?folder=/home/coder/workplace
   
