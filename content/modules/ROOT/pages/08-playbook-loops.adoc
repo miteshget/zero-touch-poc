@@ -1,0 +1,75 @@
+== 1.7 - Loops in Ansible
+
+Loops in Ansible allow you to perform a task multiple times with different values. This feature is particularly useful for tasks like creating multiple user accounts in our given example.
+
+In this challenge, you will create a simple loop that generates three new users on `node1`, instead of a single one.
+
+== ☑️ Task 1 - Create a new playbook
+
+[NOTE]
+====
+In the *VSCode Editor* tab
+====
+
+* Create the file `loop_users.yml`. This can be done by simply right clicking and selecting 'New File'.
+
+* The following playbook takes advantage of the `ansible.builtin.user` module to create users on the `node1` host.
+
+* Notice the `name: "{{ item }}"`? This is a special variable named `{{ item }}`. This variable `item` gets replaced with the values found under the `loop:` statement.
++
+[source,yaml]
+----
+---
+- name: Create multiple users with a loop
+  hosts: node1
+  become: true
+
+  tasks:
+    - name: Create a new user
+      ansible.builtin.user:
+        name: "{{ item }}"
+        state: present
+        create_home: true
+      loop:
+        - alice
+        - bob
+        - carol
+----
+
+* What changed from our original task creating a single user?
++
+** Loop Directive: The `loop` keyword is used to iterate over a list of items. In this case, the list contains the names of users we want to create: alice, bob, and carol.
+** User Creation with Loop: Instead of creating a single user, the modified task now iterates over each item in the loop list. The `{{ item }}` placeholder is dynamically replaced with each username in the list on each iteration, so the `ansible.builtin.user` module creates each user in turn.
+
+== ☑️ Task 2 - Run the `loop_users.yml` playbook
+
+[NOTE]
+====
+In the *Control* tab
+====
+
+* Change directory to `ansible-files` and run the `loop_users.yml` playbook.
++
+[source,shell]
+----
+cd ansible-files
+----
++
+[source,shell]
+----
+ansible-navigator run loop_users.yml
+----
+
+* Understand the playbook and the output:
++
+** The names are not provided to the `ansible.builtin.user` module directly. Instead, there is only a variable called `{{ item }}` for the parameter name.
+** The `loop` keyword lists the actual user names. Those replace the `{{ item }}` during the actual execution of the playbook.
+** During execution the task is only listed once, but there are three changes listed underneath it.
+
+== ✅ Next Challenge
+
+Press the `Next` button below to go to the next challenge once you’ve completed the task.
+
+== 🐛 Encountered an issue?
+
+If you have encountered an issue or have noticed something not quite right, please open an issue on GitHub: https://github.com/ansible/instruqt/issues/new?labels=writing-first-playbook&title=Issue+with+Writing+First+Playbook+slug+ID:+17-loops&assignees=leogallego.

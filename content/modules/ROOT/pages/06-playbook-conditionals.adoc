@@ -1,0 +1,148 @@
+== 1.5 - Conditionals
+
+In the following challenges, we will cover the application of conditionals, handlers, and loops in Ansible playbooks. You'll learn to control task execution with conditionals, manage service responses with handlers, and efficiently tackle repetitive tasks using loops.
+
+Let's start with conditionals. Conditionals in Ansible control whether a task should run based on certain conditions. Let's add to the `system_setup.yml` playbook the ability to install the Apache HTTP Server (httpd) only on hosts that belong to the web group in our inventory.
+
+== ☑️ Task 1 - Update the inventory file
+
+
+[NOTE]
+====
+In the **VSCode Editor** tab.
+====
+
+* Within the `ansible-files` directory, open the `inventory` file and check the inventory has the following groups and hosts. If it doesn't, correct it!
++ 
+[source,ini]
+----
+[web]
+node1
+node2
+
+[database]
+node3
+
+sql
+----
+
+
+== ☑️ Task 2 - Update our system_setup.yml playbook
+
+
+We will modify our previous playbook to limit tasks to specific hosts within the `[web]` group.
+For this, we will use the `hosts: all` setting in our playbook to target all nodes, but we will be adding a condition with `when:` to some tasks.
+
+* Update your `system_setup.yml` playbook with the changes below, paying attention to the `hosts:` and `when:` lines.
++
+[source,yaml]
+----
+- name: Basic System Setup
+  hosts: all
+  become: true
+  vars:
+    user_name: 'padawan'
+    package_name: httpd
+  tasks:
+    - name: Install security updates for the kernel
+      ansible.builtin.dnf:
+        name: 'kernel'
+        state: latest
+        security: true
+        update_only: true
+      when: inventory_hostname in groups['web']
+
+    - name: Create a new user
+      ansible.builtin.user:
+        name: "{{ user_name }}"
+        state: present
+        create_home: true
+
+    - name: Install Apache on web servers
+      ansible.builtin.dnf:
+        name: "{{ package_name }}"
+        state: present
+        when: inventory_hostname in groups['web']
+----
+
+
++
+[NOTE]
+====
+Notice an Ansible fact variable labeled `inventory_hostname` that is used within the `when` conditional to specify the specific groups that the task should run on. Users are being created in **all** hosts, while the update and Apache install are only done in the **[web]** group.
+====
+
+== ☑️ Task 3 - Run the playbook
+
+[NOTE]
+====
+In the *Control* tab
+====
+
+* Run the playbook with `ansible-navigator` again:
++
+[source,yaml]
+----
+cd ansible-files
+----
+
++
+[source,yaml]
+----
+ansible-navigator run system_setup.yml
+----
+
++
+[IMPORTANT]
+====
+Did you notice the `skipping` as you ran the playbook?
+This is due to the conditional `when` statement targeting the specific hosts for the tasks even though the `hosts:` label within the `inventory` inventory file is set to `all`.
+====
+
+== ☑️ Task 4 - Verify
+
+Once the Ansible Playbook successfully completes, run the following steps to check manually:
+
+* For `node1` (which belongs to the `[web]` group), verify both the user `padawan` and the package `httpd` exist:
+
++
+[source,cmd]
+----
+ssh node1 id padawan
+----
+
++
+[source,cmd]
+----
+ssh node1 rpm -q httpd
+----
+
+
+* For `node3` (which belongs to the `[database]` group), verify that the user `padawan` exists, but the `httpd` package is missing:
++
+[source,cmd]
+----
+ssh node3 id padawan
+----
+
++
+[source,cmd]
+----
+ssh node3 rpm -q httpd
+----
+
+
+
+
+== ✅ Next Challenge
+
+
+Press the `Next` button below to go to the next challenge once you’ve completed the task.
+
+== 🐛 Encountered an issue?
+
+If you have encountered an issue or have noticed something not quite right, please open an issue https://github.com/ansible/instruqt/issues/new?labels=writing-first-playbook&title=Issue+with+Writing+First+Playbook+slug+ID:+playbook-conditionals&assignees=leogallego
+
+
+
+

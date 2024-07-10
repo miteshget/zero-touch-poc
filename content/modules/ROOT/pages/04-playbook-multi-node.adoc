@@ -1,0 +1,82 @@
+= 1.3 - From 1 to many
+
+The biggest strength of automation lies in its ability to manage multiple systems simultaneously. In this challenge, you will modify your Ansible Playbook to target not just one host (`node1`), but to modify a group of hosts (`web`) and run the playbook on all hosts within that group.
+
+== ☑️ Task 1 - Modify hosts in the playbook
+
+
+[NOTE]
+====
+In the *VSCode Editor* tab
+====
+
+* Open your `system_setup.yml` playbook and modify the `hosts:` line value from the individual `node1` to the `web` group. Look at the example below:
++
+[source,yaml]
+----
+- name: Basic System Setup
+  hosts: web
+  become: true
+----
+
+
+== ☑️ Task 2 - Run the system_setup.yml playbook again
+
+[NOTE]
+====
+Switch to the *Control* top tab.
+====
+
+* Go into the playbook directory:
++
+[source,cmd]
+----
+cd ansible-files
+----
+
+* And run the Ansible playbook again with `ansible-navigator`
++
+[source,cmd]
+----
+ansible-navigator run system_setup.yml
+----
++
+[WARNING]
+====
+The playbook task may take a minute or two to complete as it is populating the repository metadata and updating packages for the `node2`.
+====
+
+== ☑️ Task 3 - Verify myuser exists in both nodes
+
+* Once the Ansible Playbook successfully completes, run the following steps to check manually `myuser` exists in both servers.
++
+*For node1:*
++
+[source,cmd]
+----
+ssh node1 id myuser
+----
+
++
+*For node2:*
++
+[source,cmd]
+----
+ssh node2 id myuser
+----
+
+* Output should be similar to the following:
++
+[source,text]
+----
+uid=1008(myuser) gid=1009(myuser) groups=1009(myuser)
+----
+
+
+== ✅ Next Challenge
+
+Press the `Next` button below to go to the next challenge once you’ve completed the task.
+
+== 🐛 Encountered an issue?
+
+If you have encountered an issue or have noticed something not quite right, please open an issue by visiting https://github.com/ansible/instruqt/issues/new?labels=writing-first-playbook&title=Issue+with+Writing+First+Playbook+slug+ID:+13-one-to-many&assignees=leogallego
