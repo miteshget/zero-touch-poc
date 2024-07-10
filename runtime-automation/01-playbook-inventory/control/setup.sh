@@ -2,38 +2,42 @@
 
 USER=rhel
 
-## ansible home
-mkdir /home/$USER/ansible
-## ansible-files dir
-mkdir /home/$USER/ansible-files
-## logs dir
-mkdir /home/$USER/ansible-files/.logs
+# --------------------------------------------------
+# Directories
+# --------------------------------------------------
+mkdir /home/$USER/ansible # ansible home
+mkdir /home/$USER/ansible-files # ansible-files dir
+mkdir /home/$USER/ansible-files/.logs # logs dir
 
-## ansible.cfg
-echo "[defaults]" > /home/$USER/.ansible.cfg
-echo "inventory = /home/$USER/ansible-files/inventory" >> /home/$USER/.ansible.cfg
-echo "host_key_checking = False" >> /home/$USER/.ansible.cfg
+# --------------------------------------------------
+# ansible.cfg
+# --------------------------------------------------
+su - $USER -c 'cat >/home/$USER/.ansible.cfg <<EOL
+[defaults]
+inventory = /home/$USER/ansible-files/inventory
+host_key_checking = False
+EOL
+cat /home/$USER/.ansible.cfg'
 
-## chown and chmod all files in rhel user home
-chown -R rhel:rhel /home/$USER/ansible
-chmod 777 /home/$USER/ansible
-#touch /home/rhel/ansible-files/hosts
-chown -R rhel:rhel /home/$USER/ansible-files
+# echo "[defaults]" > /home/$USER/.ansible.cfg
+# echo "inventory = /home/$USER/ansible-files/inventory" >> /home/$USER/.ansible.cfg
+# echo "host_key_checking = False" >> /home/$USER/.ansible.cfg
 
-## disable vscode workspaces trust popup
-sed -i "2 i \    \"security.workspace.trust.enabled\": false," /home/$USER/.local/share/code-server/User/settings.json
-
-## git setup
+# --------------------------------------------------
+## Setup git config
+# --------------------------------------------------
 git config --global user.email "rhel@example.com"
 git config --global user.name "Red Hat"
 su - $USER -c 'git config --global user.email "rhel@example.com"'
 su - $USER -c 'git config --global user.name "Red Hat"'
 
 
-## set ansible-navigator default settings
-## for the EE to work we need to pass env variables
-## TODO: controller_host doesnt resolve with control and 127.0.0.1
-## is interpreted within the EE
+# --------------------------------------------------
+# set ansible-navigator default settings
+# for the EE to work we need to pass env variables
+# TODO: controller_host doesnt resolve with control and 127.0.0.1
+# is interpreted within the EE
+# --------------------------------------------------
 su - $USER -c 'cat >/home/$USER/ansible-navigator.yml <<EOL
 ---
 ansible-navigator:
@@ -63,24 +67,32 @@ ansible-navigator:
 EOL
 cat /home/$USER/ansible-navigator.yml'
 
-## copy navigator settings
+# --------------------------------------------------
+# Copy navigator settings
+# --------------------------------------------------
 su - $USER -c 'cp /home/$USER/ansible-navigator.yml /home/$USER/.ansible-navigator.yml'
 su - $USER -c 'cp /home/$USER/ansible-navigator.yml /home/$USER/ansible-files/ansible-navigator.yml'
 
-## chown and chmod all files in rhel user home
+
+# --------------------------------------------------
+## chown and chmod
+# --------------------------------------------------
 chown -R rhel:rhel /home/rhel/ansible
 chmod 777 /home/rhel/ansible
-#touch /home/rhel/ansible-files/hosts
 chown -R rhel:rhel /home/rhel/ansible-files
 
-## ENV VARS FOR CONTROLLER
-## Set controller access env variables
+# --------------------------------------------------
+# ENV VARS FOR CONTROLLER
+# Set controller access env variables
+# --------------------------------------------------
 export CONTROLLER_HOST=localhost
 export CONTROLLER_USERNAME=admin
 export CONTROLLER_PASSWORD='ansible123!'
 export CONTROLLER_VERIFY_SSL=false
 
-## Set controller access env variables for system
+# --------------------------------------------------
+# Set controller access env variables for system
+# --------------------------------------------------
 cat >/etc/environment <<EOL
 CONTROLLER_HOST=localhost
 CONTROLLER_USERNAME=admin
@@ -89,26 +101,24 @@ CONTROLLER_VERIFY_SSL=false
 
 EOL
 cat /etc/environment
-## end env variables for system
 
-## RHEL 9 test
 
-#sudo dnf config-manager --set-disabled rhui-rhel-9-for-x86_64-baseos-rhui-rpms
-#sudo dnf config-manager --set-disabled rhui-rhel-9-for-x86_64-appstream-rhui-rpms
-#sudo subscription-manager repos --list
-sudo dnf config-manager --enable ansible-automation-platform
-sudo dnf config-manager --disable google*
-
+# --------------------------------------------------
+# RHEL 9 test
+# --------------------------------------------------
+# sudo dnf config-manager --enable ansible-automation-platform
+# sudo dnf config-manager --disable google*
 sudo dnf clean all
-sudo dnf install -y ansible-navigator ansible-lint nc
-#sudo dnf install -y ansible-lint
-#sudo dnf install -y nc
-#pip3 install yamllint
+# sudo dnf install -y ansible-navigator ansible-lint nc
+sudo dnf install -y ansible-lint nc
+pip3 install yamllint
 
 #Switch to correct Python version (rhel 8 workaround)
 #/usr/sbin/alternatives --set python3 /usr/bin/python3.8
 
+# --------------------------------------------------
 # Get all  solve playbooks:
+# --------------------------------------------------
 /usr/bin/git clone https://github.com/leogallego/instruqt-wyfp-2024-solve.git /tmp/first-101
 
 

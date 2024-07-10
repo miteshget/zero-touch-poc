@@ -2,14 +2,18 @@
 
 USER=rhel
 
+# --------------------------------------------------
 # Set the target directory and file
+# --------------------------------------------------
 target_directory="/home/rhel/ansible-files"
 target_file="${target_directory}/inventory"
 solve_file="/tmp/first-101/solve_11_system_setup.yml"
 solve_inventory="/tmp/first-101/solve_10_inventory"
 
 
-## OLD CHECK
+# --------------------------------------------------
+# OLD CHECK
+# --------------------------------------------------
 #cat >/tmp/hosts.solve <<EOL
 #[web]
 #node1
@@ -21,7 +25,9 @@ solve_inventory="/tmp/first-101/solve_10_inventory"
 #expected_content=$(cat /tmp/hosts.solve)
 ## END OLD CHECK
 
+# --------------------------------------------------
 # Check if the 'inventory' file exists
+# --------------------------------------------------
 if [ -f $target_file ]; then
     # Read the content of the 'inventory' file
     file_content=$(cat $target_file)
