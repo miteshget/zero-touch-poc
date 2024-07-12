@@ -1,1 +1,16 @@
+---
+- name: Solve control node
+  hosts: control
+  vars:
+    USER: rhel
+  tasks:
+    - name: Get stats of hosts file
+      ansible.builtin.stat:
+        path: /home/{{ USER }}/ansible-files/hosts
+      register: r_st_hosts
+
+    - name: Fail if the host file does not exist
+      ansible.builtin.fail:
+        msg: "Hosts file doesn't exist"
+      when: not st.stat.exist
 

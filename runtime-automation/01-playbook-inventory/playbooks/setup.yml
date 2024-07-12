@@ -1,5 +1,6 @@
 ---
-- hosts: control
+- name: Setup control node
+  hosts: control
   vars:
     USER: rhel
   tasks:
@@ -26,10 +27,16 @@
         group: "{{ USER }}"
         mode: "0644"
 
-    - name: Configure git
-      ansible.builtin.shell: |
-        git config --global user.email "{{ USER }}@example.com"
-        git config --global user.name "Red Hat"
+    - name: Create .gitconfig
+      ansible.builtin.copy:
+        content: |
+          [user]
+            email = "{{ USER }}@example.com"
+            name = Red Hat
+        dest: /home/{{ USER }}/.gitconfig
+        owner: "{{ USER }}"
+        group: "{{ USER }}"
+        mode: "0664"
 
     - name: Create ansible-navigator.yml
       ansible.builtin.copy:
@@ -85,4 +92,12 @@
           - nc
           # - ansible-navigator
           # - ansible-lint
+        state: present
+
+- name: Setup nodes
+  hosts: node1,node2,node3
+  tasks:
+    - name: Install packages
+      ansible.builtin.dnf:
+        name: cups-filesystem
         state: present
