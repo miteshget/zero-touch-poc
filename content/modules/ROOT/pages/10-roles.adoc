@@ -265,7 +265,7 @@ Congratulations on completing the lab "Writing your First Playbook"!
 
 [IMPORTANT]
 ====
-Please click the green [Next] button at the bottom to complete the lab and leave a review. Your feedback is valuable!
+Please click the [End] button at the bottom to complete the lab and leave a review. Your feedback is valuable!
 ====
 
 == 🐛 Encountered an issue?

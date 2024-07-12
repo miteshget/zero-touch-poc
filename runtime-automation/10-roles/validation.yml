@@ -31,3 +31,7 @@
       ansible.builtin.fail:
         msg: "{{ inventory_hostname }} is not accessible"
       when: "'Welcome to node' not in r_curl.content"
+
+    - name: Print Validation
+      ansible.builtin.debug:
+        msg: "Validated Module 10"
