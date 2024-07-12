@@ -1,4 +1,4 @@
-- name: Validation 
+- name: Controller Validation
   hosts: controller
   gather_facts: false
   vars:
@@ -14,7 +14,7 @@
         msg: "Role apache doesn't exist"
       when: not r_dir.stat.exists
 
-- name: Basic System Setup
+- name: Node alidation
   hosts: web
   become: true
   gather_facts: false
