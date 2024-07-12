@@ -12,7 +12,7 @@
         msg: "firewalld is not installed"
       when: "'firewalld' not in ansible_facts.packages"
 
-    - name: Check {{ inventory_hostname }} page
+    - name: Check page
       ansible.builtin.uri:
         url: http://{{ inventory_hostname }}
         return_content: true
@@ -22,5 +22,5 @@
 
     - name: Check whether page is accessible
       ansible.builtin.fail:
-        msg: "firewalld is not installed"
+        msg: "{{ inventory_hostname }} is not accessible"
       when: "'Test Page for the HTTP Server on Red Hat Enterprise Linux' not in r_curl.content"
