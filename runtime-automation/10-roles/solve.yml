@@ -8,6 +8,11 @@
     - name: Create template dir
       ansible.builtin.file:
         path: /home/{{ USER }}/ansible-files/roles
+        state: absent
+
+    - name: Create template dir
+      ansible.builtin.file:
+        path: /home/{{ USER }}/ansible-files/roles
         state: directory
         owner: "{{ USER }}"
         group: "{{ USER }}"
