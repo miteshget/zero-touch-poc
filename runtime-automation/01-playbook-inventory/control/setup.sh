@@ -120,8 +120,18 @@ pip3 install yamllint
 # --------------------------------------------------
 # Get all  solve playbooks:
 # --------------------------------------------------
-/usr/bin/git clone https://github.com/leogallego/instruqt-wyfp-2024-solve.git /tmp/first-101
+if [ -d "/tmp/first-101" ]
+  then
+    sudo rm -rf /tmp/first-101
+    /usr/bin/git clone https://github.com/leogallego/instruqt-wyfp-2024-solve.git /tmp/first-101
+else
+    /usr/bin/git clone https://github.com/leogallego/instruqt-wyfp-2024-solve.git /tmp/first-101
+fi
 
+
+/usr/bin/git clone https://github.com/miteshget/zero-touch-s2v.git /tmp/test-01
+cd /tmp/test-01/writing-first-playbook/
+/usr/bin/ansible-playbook 01/setup.yml
 
 # Get playbook from repo
 #/usr/bin/curl https://raw.githubusercontent.com/leogallego/instruqt-lifecycle-scripts/main/controller-101-setup-playbook.yml -o /tmp/controller-101-setup.yml

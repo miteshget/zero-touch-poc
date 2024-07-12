@@ -1,0 +1,86 @@
+---
+- hosts: control
+  tasks:
+    - name: Create directory
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        owner: rhel
+        group: rhel
+        mode: "0755"
+      loop:
+        - /home/rhel/ansible
+        - /home/rhel/ansible-files
+        - /home/rhel/ansible-files/.logs
+
+    - name: Create ansible.cfg
+      ansible.builtin.copy:
+        content: |
+          [defaults]
+          inventory = /home/$USER/ansible-files/inventory
+          host_key_checking = False
+        dest: /home/rhel/.ansible.cfg
+        owner: rhel
+        group: rhel
+        mode: "0644"
+
+    - name: Configure git
+      ansible.builtin.shell: |
+        git config --global user.email "rhel@example.com"
+        git config --global user.name "Red Hat"
+
+    - name: Create ansible-navigator.yml
+      ansible.builtin.copy:
+        content: |
+          ---
+          ansible-navigator:
+            ansible:
+              inventory:
+                entries:
+                - /home/rhel/ansible-files/inventory
+            execution-environment:
+              container-engine: podman
+              enabled: true
+              image: quay.io/acme_corp/servicenow-ee:latest
+              pull:
+                policy: missing
+              environment-variables:
+                pass:
+                  - CONTROLLER_USERNAME
+                  - CONTROLLER_PASSWORD
+                  - CONTROLLER_VERIFY_SSL
+                set:
+                  CONTROLLER_HOST: control.${_SANDBOX_ID}.svc.cluster.local
+            logging:
+              level: debug
+            mode: stdout
+            playbook-artifact:
+              save-as: /home/rhel/.logs/{playbook_name}-artifact-{time_stamp}.json
+        dest: /home/rhel/ansible-navigator.yml
+        owner: rhel
+        group: rhel
+        mode: "0644"
+      loop:
+        - /home/rhel/ansible-navigator.yml
+        - /home/rhel/.ansible-navigator.yml
+        - /home/rhel/ansible-files/ansible-navigator.yml
+
+    - name: Set controller access env vars for system
+      become: true
+      ansible.builtin.blockinfile:
+        path: /etc/environment
+        insertafter: 'EOF'
+        block: |
+          CONTROLLER_HOST=localhost
+          CONTROLLER_USERNAME=admin
+          CONTROLLER_PASSWORD='ansible123!'
+          CONTROLLER_VERIFY_SSL=false
+
+    - name: Install packages
+      become: true
+      ansible.builtin.dnf:
+        name:
+          - nc
+          # - ansible-navigator
+          # - ansible-lint
+        state: present

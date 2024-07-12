@@ -16,58 +16,84 @@
 
     - name: Check if module_dir and module_stage exists
       ansible.builtin.stat:
-        path: ./{{ module_dir }}/{{ item }}/{{ module_stage }}.sh
+        path: ./{{ module_dir }}/{{ module_stage }}.sh
       register: r_script
-      loop: "{{ groups['all'] }}"
 
-- name: Run on control node
-  hosts: control
-  gather_facts: false
-  become: true
-  tasks:
-    - name: Include tasks
-      ansible.builtin.include_tasks:
-        file: tasks.yml
-      when:
-        - item.stat.exists
-        - item.item == 'control'
-      loop: "{{ hostvars.localhost.r_script.results }}"
+    - name: Scirpt block
+      when: r_script.stat.exists
+      block:
+        - name: Execute setup.sh
+          environment:
+            MODULE_DIR: "{{ module_dir }}"
+            MODULE_STAGE: "{{ module_stage }}"
+          ansible.builtin.script:
+            cmd: ./{{ module_dir }}/{{ module_stage }}.sh
+          register: r_result
 
-- name: Run on node1
-  hosts: node1
-  gather_facts: false
-  become: true
-  tasks:
-    - name: Include tasks
-      ansible.builtin.include_tasks:
-        file: tasks.yml
-      when:
-        - item.stat.exists
-        - item.item == 'node1'
-      loop: "{{ hostvars.localhost.r_script.results }}"
+        - name: Write script result to file
+          ansible.builtin.copy:
+            content: "{{ r_result.stdout }}"
+            dest: "{{ job_info_dir }}/script.out"
+          when: r_result is defined and job_info_dir is defined
 
-- name: Run on node2
-  hosts: node2
-  gather_facts: false
-  become: true
-  tasks:
-    - name: Include tasks
-      ansible.builtin.include_tasks:
-        file: tasks.yml
-      when:
-        - item.stat.exists
-        - item.item == 'node2'
-      loop: "{{ hostvars.localhost.r_script.results }}"
+        - name: Output script result
+          ansible.builtin.debug:
+            var: r_result
 
-- name: Run on node3
-  hosts: node3
-  gather_facts: false
-  become: true
-  tasks:
-    - name: Include tasks
-      ansible.builtin.include_tasks:
-        file: tasks.yml
-      when:
-        - item.stat.exists
-        - item.item == 'node3'
-      loop: "{{ hostvars.localhost.r_script.results }}"
+        - name: Fail if stage fails
+          ansible.builtin.fail:
+            msg: "Stage failed"
+          when: r_result.rc != 0
+
+
+# - name: Run on control node
+#   hosts: control
+#   gather_facts: false
+#   become: true
+#   tasks:
+#     - name: Include tasks
+#       ansible.builtin.include_tasks:
+#         file: tasks.yml
+#       when:
+#         - item.stat.exists
+#         - item.item == 'control'
+#       loop: "{{ hostvars.localhost.r_script.results }}"
+
+# - name: Run on node1
+#   hosts: node1
+#   gather_facts: false
+#   become: true
+#   tasks:
+#     - name: Include tasks
+#       ansible.builtin.include_tasks:
+#         file: tasks.yml
+#       when:
+#         - item.stat.exists
+#         - item.item == 'node1'
+#       loop: "{{ hostvars.localhost.r_script.results }}"
+
+# - name: Run on node2
+#   hosts: node2
+#   gather_facts: false
+#   become: true
+#   tasks:
+#     - name: Include tasks
+#       ansible.builtin.include_tasks:
+#         file: tasks.yml
+#       when:
+#         - item.stat.exists
+#         - item.item == 'node2'
+#       loop: "{{ hostvars.localhost.r_script.results }}"
+
+# - name: Run on node3
+#   hosts: node3
+#   gather_facts: false
+#   become: true
+#   tasks:
+#     - name: Include tasks
+#       ansible.builtin.include_tasks:
+#         file: tasks.yml
+#       when:
+#         - item.stat.exists
+#         - item.item == 'node3'
+#       loop: "{{ hostvars.localhost.r_script.results }}"
