@@ -155,12 +155,6 @@ Alternatively, you can check in the CLI using the **Control** tab.
 ----
 curl http://node1 | grep "HTTP Server"
 ----
-+
-.output
-[source,textinfo]
-----
-rust
-----
 
 * Now let's try with `node3`, the server in the `[database]` group:
 +
@@ -168,12 +162,7 @@ rust
 ----
 curl http://node3 
 ----
-+
-.output
-[source,textinfo]
-----
-kotlin
-----
+
 
 * The output should look like this:
 +
