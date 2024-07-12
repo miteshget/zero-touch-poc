@@ -1,6 +1,7 @@
 ---
 - name: Solve control node
   hosts: controller
+  gather_facts: false
   vars:
     USER: rhel
   tasks:
@@ -58,14 +59,9 @@
 - name: Basic System Setup
   hosts: web
   become: true
+  gather_facts: false
   tasks:
-    - name: Create a new user
-      ansible.builtin.user:
-        name: padawan
-        state: present
-        create_home: true
-
-    - name: Create a new user
+    - name: Install httpd
       ansible.builtin.dnf:
         name: httpd
         state: present

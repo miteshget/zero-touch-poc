@@ -1,6 +1,7 @@
 ---
 - name: Solve control node
   hosts: controller
+  gather_facts: false
   vars:
     USER: rhel
   tasks:

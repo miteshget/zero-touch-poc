@@ -1,1 +1,25 @@
-#!/bin/bash
+- name: Basic System Setup
+  hosts: web
+  become: true
+  gather_facts: false
+  tasks:
+
+    - name: Check user existence
+      ansible.builtin.command:
+        cmd: id padawan
+      ignore_errors: true
+      register: user_check
+
+    - name: Fail if user does not exist
+      ansible.builtin.fail:
+        msg: "User padawan doesn't exists."
+      when: user_check.rc != 0
+
+    - name: Gather the package facts
+      ansible.builtin.package_facts:
+        manager: rpm
+
+    - name: Check whether a package called foobar is installed
+      ansible.builtin.fail:
+        msg: "httpd is not installed"
+      when: "'httpd' not in ansible_facts.packages"

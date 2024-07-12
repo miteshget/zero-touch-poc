@@ -1,6 +1,7 @@
 ---
 - name: Setup control node
   hosts: controller
+  gather_facts: false
   vars:
     USER: rhel
   tasks:
@@ -10,6 +11,7 @@
 
 - name: Setup nodes
   hosts: nodes
+  gather_facts: false
   tasks:
     - name: Print msg
       ansible.builtin.debug:
