@@ -88,7 +88,7 @@
 
     - name: Ensure firewalld is running
       ansible.builtin.service:
-        name: firewalld
+        name: "{{ item }}"
         state: started
         enabled: true
       loop:
