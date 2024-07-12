@@ -1,0 +1,57 @@
+---
+- name: Setup control node
+  hosts: control
+  vars:
+    USER: rhel
+  tasks:
+    - name: Print msg
+      ansible.builtin.debug:
+        msg: "Setup has completed"
+
+    - name: Create ansible-navigator.yml
+      ansible.builtin.copy:
+        content: |
+          ---
+          ansible-navigator:
+            ansible:
+              inventory:
+                entries:
+                - /home/rhel/ansible-files/hosts
+            execution-environment:
+              container-engine: podman
+              enabled: true
+              image: quay.io/acme_corp/first_playbook_ee:latest
+              pull:
+                policy: missing
+            logging:
+              level: debug
+            mode: stdout
+            playbook-artifact:
+              save-as: /home/rhel/{playbook_name}-artifact-{time_stamp}.json
+        dest: "/home/{{ USER }}/ansible-files/ansible-navigator.yml"
+        owner: "{{ USER }}"
+        group: "{{ USER }}"
+        mode: "0644"
+
+    - name: Install packages
+      become: true
+      ansible.builtin.dnf:
+        name:
+          - nc
+          # - ansible-navigator
+          # - ansible-lint
+        state: present
+
+
+- name: Setup nodes
+  hosts: node1,node2,node3
+  tasks:
+    - name: Install packages
+      become: true
+      ansible.builtin.dnf:
+        name: cups-filesystem
+        state: present
+
+    - name: Disable SELinux
+      ansible.posix.selinux:
+        state: disabled

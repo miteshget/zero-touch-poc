@@ -84,21 +84,3 @@
           CONTROLLER_USERNAME=admin
           CONTROLLER_PASSWORD='ansible123!'
           CONTROLLER_VERIFY_SSL=false
-
-    - name: Install packages
-      become: true
-      ansible.builtin.dnf:
-        name:
-          - nc
-          # - ansible-navigator
-          # - ansible-lint
-        state: present
-
-- name: Setup nodes
-  hosts: node1,node2,node3
-  tasks:
-    - name: Install packages
-      become: true
-      ansible.builtin.dnf:
-        name: cups-filesystem
-        state: present
