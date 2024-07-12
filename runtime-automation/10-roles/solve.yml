@@ -120,4 +120,3 @@
         owner: "{{ USER }}"
         group: "{{ USER }}"
         mode: "0644"
-
