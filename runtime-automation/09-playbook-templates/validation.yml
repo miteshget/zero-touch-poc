@@ -1,1 +1,14 @@
-#!/bin/bash
+- name: Solve control node
+  hosts: controller
+  vars:
+    USER: rhel
+  tasks:
+    - name: Get stats of motd.j2 file
+      ansible.builtin.stat:
+        path: /home/{{ USER }}/ansible-files/templates/motd.j2
+      register: r_system
+
+    - name: Fail if the host file does not exist
+      ansible.builtin.fail:
+        msg: "system file doesn't exist"
+      when: not r_system.stat.exists
