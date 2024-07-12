@@ -35,7 +35,7 @@
   tasks:
     - name: Create a new users
       ansible.builtin.user:
-        name: myuser
+        name: "{{ item }}"
         state: present
         create_home: true
       loop:
