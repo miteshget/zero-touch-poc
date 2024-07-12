@@ -1,0 +1,16 @@
+---
+- name: Setup control node
+  hosts: controller
+  vars:
+    USER: rhel
+  tasks:
+    - name: Print msg
+      ansible.builtin.debug:
+        msg: "Setup has completed"
+
+- name: Setup nodes
+  hosts: node1,node2,node3
+  tasks:
+    - name: Print msg
+      ansible.builtin.debug:
+        msg: "Setup has completed"

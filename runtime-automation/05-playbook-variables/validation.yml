@@ -1,0 +1,15 @@
+- name: Basic System Setup
+  hosts: web
+  become: true
+  tasks:
+
+    - name: Check user existence
+      ansible.builtin.command:
+        cmd: id padawan
+      ignore_errors: true
+      register: user_check
+
+    - name: Fail if user does not exist
+      ansible.builtin.fail:
+        msg: "User 'myuser'doesn't exists."
+      when: user_check.rc != 0
