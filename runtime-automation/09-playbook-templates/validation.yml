@@ -10,5 +10,5 @@
 
     - name: Fail if the host file does not exist
       ansible.builtin.fail:
-        msg: "system file doesn't exist"
+        msg: "motd file doesn't exist"
       when: not r_system.stat.exists
