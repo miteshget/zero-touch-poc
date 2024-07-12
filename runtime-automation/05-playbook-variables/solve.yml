@@ -22,7 +22,7 @@
 
               - name: Create a new user
                 ansible.builtin.user:
-                  name: "{{ user_name }}"
+                  name: "{% raw %}{{ user_name }}{% endraw %}"
                   state: present
                   create_home: true
         dest: /home/{{ USER }}/ansible-files/system_setup.yml
