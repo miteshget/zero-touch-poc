@@ -1,32 +1,34 @@
 ---
 - hosts: control
+  vars:
+    USER: rhel
   tasks:
     - name: Create directory
       ansible.builtin.file:
         path: "{{ item }}"
         state: directory
-        owner: rhel
-        group: rhel
+        owner: "{{ USER }}"
+        group: "{{ USER }}"
         mode: "0755"
       loop:
-        - /home/rhel/ansible
-        - /home/rhel/ansible-files
-        - /home/rhel/ansible-files/.logs
+        - /home/{{ USER }}/ansible
+        - /home/{{ USER }}/ansible-files
+        - /home/{{ USER }}/ansible-files/.logs
 
     - name: Create ansible.cfg
       ansible.builtin.copy:
         content: |
           [defaults]
-          inventory = /home/$USER/ansible-files/inventory
+          inventory = /home/{{ USER }}/ansible-files/inventory
           host_key_checking = False
-        dest: /home/rhel/.ansible.cfg
-        owner: rhel
-        group: rhel
+        dest: /home/{{ USER }}/.ansible.cfg
+        owner: "{{ USER }}"
+        group: "{{ USER }}"
         mode: "0644"
 
     - name: Configure git
       ansible.builtin.shell: |
-        git config --global user.email "rhel@example.com"
+        git config --global user.email "{{ USER }}@example.com"
         git config --global user.name "Red Hat"
 
     - name: Create ansible-navigator.yml
@@ -37,7 +39,7 @@
             ansible:
               inventory:
                 entries:
-                - /home/rhel/ansible-files/inventory
+                - /home/{{ USER }}/ansible-files/inventory
             execution-environment:
               container-engine: podman
               enabled: true
@@ -55,15 +57,15 @@
               level: debug
             mode: stdout
             playbook-artifact:
-              save-as: /home/rhel/.logs/{playbook_name}-artifact-{time_stamp}.json
-        dest: /home/rhel/ansible-navigator.yml
-        owner: rhel
-        group: rhel
+              save-as: /home/{{ USER }}/.logs/{playbook_name}-artifact-{time_stamp}.json
+        dest: "{{ item }}"
+        owner: "{{ USER }}"
+        group: "{{ USER }}"
         mode: "0644"
       loop:
-        - /home/rhel/ansible-navigator.yml
-        - /home/rhel/.ansible-navigator.yml
-        - /home/rhel/ansible-files/ansible-navigator.yml
+        - /home/{{ USER }}/ansible-navigator.yml
+        - /home/{{ USER }}/.ansible-navigator.yml
+        - /home/{{ USER }}/ansible-files/ansible-navigator.yml
 
     - name: Set controller access env vars for system
       become: true
