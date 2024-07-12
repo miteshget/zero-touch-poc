@@ -23,7 +23,7 @@
                 name: myuser
                 state: present
                 create_home: true
-        dest: /home/{{ USER }}/ansible-files/hosts
+        dest: /home/{{ USER }}/ansible-files/system_setup.yml
         owner: "{{ USER }}"
         group: "{{ USER }}"
         mode: "0644"
