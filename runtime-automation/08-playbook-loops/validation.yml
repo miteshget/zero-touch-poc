@@ -1,1 +1,48 @@
-#!/bin/bash
+---
+- name: Solve control node
+  hosts: controller
+  vars:
+    USER: rhel
+  tasks:
+    - name: Get stats of loop_users.yml file
+      ansible.builtin.stat:
+        path: /home/{{ USER }}/ansible-files/loop_users.yml
+      register: r_system
+
+    - name: Fail if the host file does not exist
+      ansible.builtin.fail:
+        msg: "system file doesn't exist"
+      when: not r_system.stat.exists
+
+    - name: Check user existence
+      ansible.builtin.command:
+        cmd: id alice
+      ignore_errors: true
+      register: user_check
+
+    - name: Fail if user does not exist
+      ansible.builtin.fail:
+        msg: "User alice doesn't exists."
+      when: user_check.rc != 0
+
+    - name: Check user existence
+      ansible.builtin.command:
+        cmd: id bob
+      ignore_errors: true
+      register: user_check
+
+    - name: Fail if user does not exist
+      ansible.builtin.fail:
+        msg: "User bob doesn't exists."
+      when: user_check.rc != 0
+
+    - name: Check user existence
+      ansible.builtin.command:
+        cmd: id carol
+      ignore_errors: true
+      register: user_check
+
+    - name: Fail if user does not exist
+      ansible.builtin.fail:
+        msg: "User carol doesn't exists."
+      when: user_check.rc != 0
