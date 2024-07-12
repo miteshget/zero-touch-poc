@@ -106,6 +106,8 @@
   hosts: nodes
   become: true
   gather_facts: true
+  vars:
+    USER: rhel
   tasks:
     - name: Update MOTD from Jinja2 Template
       ansible.builtin.copy:
