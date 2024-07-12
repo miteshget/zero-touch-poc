@@ -1,6 +1,6 @@
 ---
-- name: Solve control node
-  hosts: controller
+- name: Solve nodes
+  hosts: node1
   vars:
     USER: rhel
   tasks:
