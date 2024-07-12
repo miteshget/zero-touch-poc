@@ -105,7 +105,7 @@
 - name: Basic System Setup
   hosts: nodes
   become: true
-  gather_facts: false
+  gather_facts: true
   tasks:
     - name: Update MOTD from Jinja2 Template
       ansible.builtin.copy:
