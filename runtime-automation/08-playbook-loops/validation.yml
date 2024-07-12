@@ -1,6 +1,6 @@
 ---
-- name: Solve nodes
-  hosts: node1
+- name: Solve control node
+  hosts: controller
   vars:
     USER: rhel
   tasks:
@@ -14,6 +14,11 @@
         msg: "system file doesn't exist"
       when: not r_system.stat.exists
 
+
+- name: Basic System Setup
+  hosts: node1
+  become: true
+  tasks:
     - name: Check user existence
       ansible.builtin.command:
         cmd: id alice
