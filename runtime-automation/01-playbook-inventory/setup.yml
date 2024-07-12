@@ -98,6 +98,7 @@
   hosts: node1,node2,node3
   tasks:
     - name: Install packages
+      become: true
       ansible.builtin.dnf:
         name: cups-filesystem
         state: present
