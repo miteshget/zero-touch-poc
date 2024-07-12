@@ -9,7 +9,7 @@
       ignore_errors: true
       register: user_check
 
-    - name: Report user status
-      ansible.builtin.debug:
-        msg: "User 'myuser' exists."
-      when: user_check.rc == 0
+    - name: Fail if user does not exist
+      ansible.builtin.fail:
+        msg: "User 'myuser'doesn't exists."
+      when: user_check.rc != 0
