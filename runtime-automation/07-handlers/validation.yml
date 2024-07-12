@@ -16,6 +16,7 @@
       ansible.builtin.uri:
         url: http://node1
         return_content: true
+        status_code: [200, 403]
       register: r_curl
 
     - name: Check whether page is accessible
