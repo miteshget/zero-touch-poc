@@ -14,8 +14,6 @@
 
           [database]
           node3
-
-          sql
         dest: /home/{{ USER }}/ansible-files/hosts
         owner: "{{ USER }}"
         group: "{{ USER }}"

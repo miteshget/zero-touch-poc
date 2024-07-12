@@ -22,8 +22,6 @@ node2
 
 [database]
 node3
-
-sql
 ----
 
 
