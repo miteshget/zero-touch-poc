@@ -29,7 +29,7 @@
         group: "{{ USER }}"
         mode: "0644"
 
-    - name: Create vars/main.yml
+    - name: Create tasks/main.yml
       ansible.builtin.copy:
         content: |
           ---
@@ -75,7 +75,7 @@
         group: "{{ USER }}"
         mode: "0644"
 
-    - name: Create vars/main.yml
+    - name: Create handlers/main.yml
       ansible.builtin.copy:
         content: |
           ---
@@ -89,7 +89,7 @@
         group: "{{ USER }}"
         mode: "0644"
 
-    - name: Create vars/main.yml
+    - name: Create templates/index.html.j2
       ansible.builtin.copy:
         content: |
           {% raw %}
@@ -107,7 +107,7 @@
         group: "{{ USER }}"
         mode: "0644"
 
-    - name: Create vars/main.yml
+    - name: Create deploy_apache.yml
       ansible.builtin.copy:
         content: |
           ---
@@ -120,3 +120,62 @@
         owner: "{{ USER }}"
         group: "{{ USER }}"
         mode: "0644"
+
+
+- name: Basic System Setup
+  hosts: web
+  become: true
+  gather_facts: true
+  vars:
+    apache_package_name: httpd
+    apache_service_name: httpd
+  tasks:
+    - name: Install Apache web server
+      ansible.builtin.package:
+        name: "{{ apache_package_name }}"
+        state: present
+
+    - name: Ensure Apache is running and enabled
+      ansible.builtin.service:
+        name: "{{ apache_service_name }}"
+        state: started
+        enabled: true
+
+    - name: Install firewalld
+      ansible.builtin.dnf:
+        name: firewalld
+        state: present
+
+    - name: Ensure firewalld is running
+      ansible.builtin.service:
+        name: firewalld
+        state: started
+        enabled: true
+
+    - name: Allow HTTP traffic on web servers
+      ansible.posix.firewalld:
+        service: http
+        permanent: true
+        state: enabled
+      when: inventory_hostname in groups['web']
+      notify: Reload Firewall
+
+    - name: Deploy custom index.html
+      ansible.builtin.copy:
+        content: |
+          <html>
+          <head>
+          <title>Welcome to {{ ansible_hostname }}</title>
+          </head>
+          <body>
+          <h1>Hello from {{ ansible_hostname }}</h1>
+          </body>
+          </html>
+        dest: /var/www/html/index.html
+        mode: "0644"
+
+  handlers:
+    - name: Reload Firewall
+      ansible.builtin.service:
+        name: firewalld
+        state: reloaded
