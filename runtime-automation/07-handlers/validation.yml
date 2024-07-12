@@ -18,6 +18,7 @@
         return_content: true
         status_code: [200, 403]
       register: r_curl
+      ignore_errors: true
 
     - name: Check whether page is accessible
       ansible.builtin.fail:
