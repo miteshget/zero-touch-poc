@@ -10,6 +10,13 @@ mkdir /home/$USER/ansible-files # ansible-files dir
 mkdir /home/$USER/ansible-files/.logs # logs dir
 
 # --------------------------------------------------
+## chown and chmod
+# --------------------------------------------------
+chmod 755 /home/$USER/ansible
+chown -R ${USER}:${USER} /home/$USER/ansible
+chown -R ${USER}:${USER} /home/$USER/ansible-files
+
+# --------------------------------------------------
 # ansible.cfg
 # --------------------------------------------------
 su - $USER -c 'cat >/home/$USER/.ansible.cfg <<EOL
@@ -18,10 +25,6 @@ inventory = /home/$USER/ansible-files/inventory
 host_key_checking = False
 EOL
 cat /home/$USER/.ansible.cfg'
-
-# echo "[defaults]" > /home/$USER/.ansible.cfg
-# echo "inventory = /home/$USER/ansible-files/inventory" >> /home/$USER/.ansible.cfg
-# echo "host_key_checking = False" >> /home/$USER/.ansible.cfg
 
 # --------------------------------------------------
 ## Setup git config
@@ -77,8 +80,6 @@ su - $USER -c 'cp /home/$USER/ansible-navigator.yml /home/$USER/ansible-files/an
 # --------------------------------------------------
 ## chown and chmod
 # --------------------------------------------------
-chown -R rhel:rhel /home/rhel/ansible
-chmod 777 /home/rhel/ansible
 chown -R rhel:rhel /home/rhel/ansible-files
 
 # --------------------------------------------------
@@ -108,9 +109,9 @@ cat /etc/environment
 # --------------------------------------------------
 # sudo dnf config-manager --enable ansible-automation-platform
 # sudo dnf config-manager --disable google*
-sudo dnf clean all
 # sudo dnf install -y ansible-navigator ansible-lint nc
-sudo dnf install -y ansible-lint nc
+sudo dnf clean all
+sudo dnf install -y nc
 pip3 install yamllint
 
 #Switch to correct Python version (rhel 8 workaround)
