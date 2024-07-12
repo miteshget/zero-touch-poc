@@ -12,9 +12,9 @@
         msg: "firewalld is not installed"
       when: "'firewalld' not in ansible_facts.packages"
 
-    - name: Check node1 page
+    - name: Check {{ inventory_hostname }} page
       ansible.builtin.uri:
-        url: http://node1
+        url: http://{{ inventory_hostname }}
         return_content: true
         status_code: [200, 403]
       register: r_curl
