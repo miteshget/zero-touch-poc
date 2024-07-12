@@ -1,6 +1,6 @@
 ---
 - name: Setup control node
-  hosts: control
+  hosts: controller
   vars:
     USER: rhel
   tasks:

@@ -1,6 +1,6 @@
 ---
 - name: Solve control node
-  hosts: control
+  hosts: controller
   vars:
     USER: rhel
   tasks:
