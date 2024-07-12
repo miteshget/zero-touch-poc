@@ -22,4 +22,4 @@
     - name: Check whether a package called foobar is installed
       ansible.builtin.fail:
         msg: "httpd is not installed"
-      when: "'httpd' in ansible_facts.packages"
+      when: "'httpd' not in ansible_facts.packages"
