@@ -12,5 +12,5 @@
     - name: Fail if the host file does not exist
       ansible.builtin.fail:
         msg: "Hosts file doesn't exist"
-      when: not st.stat.exist
+      when: not st.stat.exists
 
