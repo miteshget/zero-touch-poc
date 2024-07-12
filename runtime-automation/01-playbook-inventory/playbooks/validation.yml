@@ -7,10 +7,10 @@
     - name: Get stats of hosts file
       ansible.builtin.stat:
         path: /home/{{ USER }}/ansible-files/hosts
-      register: r_st_hosts
+      register: r_hosts
 
     - name: Fail if the host file does not exist
       ansible.builtin.fail:
         msg: "Hosts file doesn't exist"
-      when: not st.stat.exists
+      when: not r_hosts.stat.exists
 
