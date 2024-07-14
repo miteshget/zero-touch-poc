@@ -74,15 +74,15 @@ Pay attention to indentation and the spaces
   tasks:
     - name: Install security updates for the kernel
       ansible.builtin.dnf:
-      name: 'kernel'
-      state: latest
-      security: true
+        name: 'kernel'
+        state: latest
+        security: true
 
     - name: Create a new user
       ansible.builtin.user:
-      name: myuser
-      state: present
-      create_home: true
+        name: myuser
+        state: present
+        create_home: true
 ----
 
 

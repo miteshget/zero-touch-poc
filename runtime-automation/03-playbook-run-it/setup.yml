@@ -16,7 +16,7 @@
             ansible:
               inventory:
                 entries:
-                - /home/rhel/ansible-files/hosts
+                - /home/rhel/ansible-files/inventory
             execution-environment:
               container-engine: podman
               enabled: true
@@ -27,20 +27,11 @@
               level: debug
             mode: stdout
             playbook-artifact:
-              save-as: /home/rhel/{playbook_name}-artifact-{time_stamp}.json
+              save-as: /home/rhel/.logs/{playbook_name}-artifact-{time_stamp}.json
         dest: "/home/{{ USER }}/ansible-files/ansible-navigator.yml"
         owner: "{{ USER }}"
         group: "{{ USER }}"
         mode: "0644"
-
-    - name: Install packages
-      become: true
-      ansible.builtin.dnf:
-        name:
-          - nc
-          # - ansible-navigator
-          # - ansible-lint
-        state: present
 
 
 - name: Setup nodes
