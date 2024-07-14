@@ -22,7 +22,6 @@
         group: "{{ USER }}"
         mode: "0755"
       loop:
-        - /home/{{ USER }}/ansible
         - /home/{{ USER }}/ansible-files
         - /home/{{ USER }}/.logs
 
@@ -60,18 +59,12 @@
             execution-environment:
               container-engine: podman
               enabled: true
-              image: quay.io/acme_corp/servicenow-ee:latest
+              image: quay.io/acme_corp/first_playbook_ee:latest
               pull:
                 policy: missing
-              environment-variables:
-                pass:
-                  - CONTROLLER_USERNAME
-                  - CONTROLLER_PASSWORD
-                  - CONTROLLER_VERIFY_SSL
-                set:
-                  CONTROLLER_HOST: control.${_SANDBOX_ID}.svc.cluster.local
             logging:
               level: debug
+              file: /home/{{ USER }}/.logs/ansible-navigator.log
             mode: stdout
             playbook-artifact:
               save-as: /home/{{ USER }}/.logs/{playbook_name}-artifact-{time_stamp}.json
@@ -80,17 +73,5 @@
         group: "{{ USER }}"
         mode: "0644"
       loop:
-        - /home/{{ USER }}/ansible-navigator.yml
         - /home/{{ USER }}/.ansible-navigator.yml
         - /home/{{ USER }}/ansible-files/ansible-navigator.yml
-
-    - name: Set controller access env vars for system
-      become: true
-      ansible.builtin.blockinfile:
-        path: /etc/environment
-        insertafter: 'EOF'
-        block: |
-          CONTROLLER_HOST=localhost
-          CONTROLLER_USERNAME=admin
-          CONTROLLER_PASSWORD='ansible123!'
-          CONTROLLER_VERIFY_SSL=false
