@@ -11,7 +11,7 @@
           [web]
           node1
           node2
-        dest: /home/{{ USER }}/ansible-files/hosts
+        dest: /home/{{ USER }}/ansible-files/inventory
         owner: "{{ USER }}"
         group: "{{ USER }}"
         mode: "0644"

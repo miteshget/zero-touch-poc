@@ -7,7 +7,7 @@
   tasks:
     - name: Get stats of hosts file
       ansible.builtin.stat:
-        path: /home/{{ USER }}/ansible-files/hosts
+        path: /home/{{ USER }}/ansible-files/inventory
       register: r_hosts
 
     - name: Fail if the host file does not exist

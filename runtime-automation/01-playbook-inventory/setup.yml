@@ -5,6 +5,15 @@
   vars:
     USER: rhel
   tasks:
+    - name: Install packages
+      become: true
+      ansible.builtin.dnf:
+        name:
+          - nc
+          - ansible-navigator
+          - ansible-lint
+        state: present
+
     - name: Create directory
       ansible.builtin.file:
         path: "{{ item }}"
@@ -15,7 +24,7 @@
       loop:
         - /home/{{ USER }}/ansible
         - /home/{{ USER }}/ansible-files
-        - /home/{{ USER }}/ansible-files/.logs
+        - /home/{{ USER }}/.logs
 
     - name: Create ansible.cfg
       ansible.builtin.copy:
