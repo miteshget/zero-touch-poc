@@ -5,7 +5,7 @@
   vars:
     USER: rhel
   tasks:
-    - name: Create hosts
+    - name: Create loop_usr.yml
       ansible.builtin.copy:
         content: |
           ---

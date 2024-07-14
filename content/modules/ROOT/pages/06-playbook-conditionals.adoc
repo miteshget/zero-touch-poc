@@ -60,7 +60,7 @@ For this, we will use the `hosts: all` setting in our playbook to target all nod
       ansible.builtin.dnf:
         name: "{{ package_name }}"
         state: present
-        when: inventory_hostname in groups['web']
+      when: inventory_hostname in groups['web']
 ----
 
 
@@ -79,13 +79,13 @@ In the *Control* tab
 
 * Run the playbook with `ansible-navigator` again:
 +
-[source,yaml]
+[source,cmd]
 ----
 cd ansible-files
 ----
 
 +
-[source,yaml]
+[source,cmd]
 ----
 ansible-navigator run system_setup.yml
 ----

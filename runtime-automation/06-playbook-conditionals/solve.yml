@@ -5,7 +5,7 @@
   vars:
     USER: rhel
   tasks:
-    - name: Create hosts
+    - name: Update inventory
       ansible.builtin.copy:
         content: |
           [web]
@@ -14,7 +14,7 @@
 
           [database]
           node3
-        dest: /home/{{ USER }}/ansible-files/hosts
+        dest: /home/{{ USER }}/ansible-files/inventory
         owner: "{{ USER }}"
         group: "{{ USER }}"
         mode: "0644"
@@ -48,7 +48,7 @@
                 ansible.builtin.dnf:
                   name: "{% raw %}{{ package_name }}{% endraw %}"
                   state: present
-                  when: inventory_hostname in groups['web']
+                when: inventory_hostname in groups['web']
         dest: /home/{{ USER }}/ansible-files/system_setup.yml
         owner: "{{ USER }}"
         group: "{{ USER }}"

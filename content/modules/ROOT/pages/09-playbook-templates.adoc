@@ -38,10 +38,10 @@ WARNING: We are only showing the task to add. Pay attention to the indentation a
 +
 [source,yaml]
 ----
-- name: Update MOTD from Jinja2 Template
-  ansible.builtin.template:
-    src: templates/motd.j2
-    dest: /etc/motd
+    - name: Update MOTD from Jinja2 Template
+      ansible.builtin.template:
+        src: templates/motd.j2
+        dest: /etc/motd
 ----
 
 +
