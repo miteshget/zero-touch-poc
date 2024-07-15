@@ -9,6 +9,14 @@
         path: /home/{{ USER }}/ansible-files/loop_users.yml
       register: r_system
 
+    - name: Write fail logs
+      ansible.builtin.copy:
+        content: "Challenge 1.7 - The 'loop_users.yml' file does not exist in the specified directory."
+        dest: "{{ job_info_dir }}/output.txt"
+        mode: "0644"
+      when: not r_system.stat.exists
+      delegate_to: localhost
+
     - name: Fail if the host file does not exist
       ansible.builtin.fail:
         msg: "system file doesn't exist"
@@ -25,6 +33,14 @@
       ignore_errors: true
       register: user_check
 
+    - name: Write fail logs
+      ansible.builtin.copy:
+        content: "Challenge 1.7 - User alice doesn't exist. Something is wrong."
+        dest: "{{ job_info_dir }}/output.txt"
+        mode: "0644"
+      when: user_check.rc != 0
+      delegate_to: localhost
+
     - name: Fail if user does not exist
       ansible.builtin.fail:
         msg: "User alice doesn't exists."
@@ -36,6 +52,14 @@
       ignore_errors: true
       register: user_check
 
+    - name: Write fail logs
+      ansible.builtin.copy:
+        content: "Challenge 1.7 - User bob doesn't exist. Something is wrong."
+        dest: "{{ job_info_dir }}/output.txt"
+        mode: "0644"
+      when: user_check.rc != 0
+      delegate_to: localhost
+
     - name: Fail if user does not exist
       ansible.builtin.fail:
         msg: "User bob doesn't exists."
@@ -46,6 +70,14 @@
         cmd: id carol
       ignore_errors: true
       register: user_check
+
+    - name: Write fail logs
+      ansible.builtin.copy:
+        content: "Challenge 1.7 - User carol doesn't exist. Something is wrong."
+        dest: "{{ job_info_dir }}/output.txt"
+        mode: "0644"
+      when: user_check.rc != 0
+      delegate_to: localhost
 
     - name: Fail if user does not exist
       ansible.builtin.fail:
