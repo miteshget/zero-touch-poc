@@ -12,7 +12,7 @@
     - name: Write fail logs
       ansible.builtin.copy:
         content: "Challenge 1.1: The 'system_setup.yml' file does not exist in the specified directory."
-        dest: "{{ job_info_dir }}/output.txt"
+        dest: "{{ job_info_dir }}/script.out"
         mode: "0644"
       when: not r_system.stat.exists
       delegate_to: localhost
