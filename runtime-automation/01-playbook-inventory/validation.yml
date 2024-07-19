@@ -13,7 +13,7 @@
     - name: Write fail logs
       ansible.builtin.copy:
         content: "The 'inventory' file does not exist."
-        dest: "{{ job_info_dir }}/script.out"
+        dest: "{{ job_info_dir }}/output.txt"
         mode: "0644"
       when: not r_hosts.stat.exists
       delegate_to: localhost
