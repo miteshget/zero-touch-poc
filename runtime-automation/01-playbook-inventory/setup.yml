@@ -5,24 +5,31 @@
   vars:
     USER: rhel
   tasks:
-    - name: Create ansible-automation-platform repo
+    - name: Become block
       become: true
-      ansible.builtin.copy:
-        content: |
-          [ansible-automation-platform]
-          name = Red Hat Ansible Automation Platform
-          baseurl = file:///var/ansible-automation-platform/el8_repos/
-          enabled = 1
-          gpgcheck = 1
-          gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
-        dest: /etc/yum.repos.d/ansible-automation-platform.repo
-        mode: "0644"
+      block:
+        - name: Create ansible-automation-platform repo
+          ansible.builtin.copy:
+            content: |
+              [ansible-automation-platform]
+              name = Red Hat Ansible Automation Platform
+              baseurl = file:///var/ansible-automation-platform/el8_repos/
+              enabled = 1
+              gpgcheck = 1
+              gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+            dest: /etc/yum.repos.d/ansible-automation-platform.repo
+            mode: "0644"
 
-    - name: Remove setup bundle
-      become: true
-      ansible.builtin.file:
-        path: /var/ansible-automation-platform-setup-bundle-2.4-6-x86_64.tar.gz
-        state: absent
+        - name: Remove setup bundle
+          ansible.builtin.file:
+            path: /var/ansible-automation-platform-setup-bundle-2.4-6-x86_64.tar.gz
+            state: absent
+
+        - name: Stop register warning
+          ansible.builtin.replace:
+            path: /etc/yum/pluginconf.d/subscription-manager.conf
+            regexp: 'enable*'
+            replace: 'enabled=0'
 
     - name: Create directory
       ansible.builtin.file:
