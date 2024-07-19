@@ -1,14 +1,16 @@
 = 1.0 - The basics & creating an inventory
-:slug: playbook-inventory
-:id: 0tsskilmdxe0
-:teaser: Write your inventory, know who Ansible talks to!
+:sectnums:
 
-== 💡 Laboratory tips!
+
+=== Laboratory tips!
+.Click for details
+[%collapsible]
+====
 Before we begin, some basic tips to improve your lab experience:
 
-. The instructions sidebar to the right can be resized (drag and drop the border) or completely collapsed (click on the top left arrow of the sidebar) in case you need extra space for the main panel. You can try this now!
+. The instructions sidebar to the left can be resized in case you need extra space for the main panel. You can try this now!
 
-. In the right sidebar, you will find the different sections. In each chapter, there will be an introduction to the challenge and the related tasks below. The sections can be collapsed and expanded by clicking on them.
+. In the left sidebar, you will find the different sections. In each chapter, there will be an introduction to the challenge and the related tasks below. The sections can be collapsed and expanded by clicking on them.
 +
 image::image.png[image.png]
 
@@ -18,34 +20,44 @@ image::image.png[image.png]
 
 . Each "code box" for playbooks and commands has a copy & paste feature, where if you click on the box, the content will be copied to the clipboard. You can paste this into the VSCode Editor if you run into problems typing.
 
-. When you finish with a challenge (or chapter), you need to click the green **Check** button to move to the next. This will review the steps.
+. When you finish with a challenge (or chapter), you need to click the blue **Next** button to move to the next. This will review the steps.
 
-. You have the option to **Skip** a challenge or chapter, keep in mind this will auto-solve the exercises.
-
-. The lab has a 55 minutes limit that can be extended at the end. If you need more time, make sure to accept the popup.
-
-+
-[NOTE]
-====
-At the end of the lab you can leave a review!
+. You have the option to **Solve** a challenge or chapter, keep in mind this will auto-solve the exercises.
 ====
 
-== 👋  The basics
+
+=== The basics
+.Click for details
+[%collapsible]
+====
 Welcome to the writing your first Ansible playbook lab!
 
 If you are new to Ansible Automation Platform, in this hands-on laboratory we will guide you on what is an Ansible playbook and how to write one to start your automation journey!
 
 In this first challenge, you will learn about the Ansible command-line tool called `ansible-navigator` and you will also create an `inventory` file.
+====
 
-=== ☑️ Task 1 - What is Ansible Navigator?
+=== ☑️ Tasks
+
+.Task 1 - What is Ansible Navigator?
+[%collapsible]
+====
 Ansible navigator is a command-line (CLI) based tool for creating, reviewing, and troubleshooting Ansible content. This includes inventories, playbooks, and collections. In the following challenges you will use the `ansible-navigator` command to run the Ansible playbooks you create.
+====
 
-=== ☑️ Task 2 - What is an inventory?
+
+.Task 2 - What is an inventory?
+[%collapsible]
+====
 An `inventory` file is a text file (usually in `.ini` format) that specifies the nodes (remote devices) that will be managed by the control machine (from where we run the automation).
 
 The inventory may include a list of hostnames or IP addresses associated with the managed nodes, depending on the need. The inventory file allows for nodes to be organized into groups by declaring a host group name within square brackets, for ex. `[group]`.
 
-=== ☑️ Task 3 - Creation of an Inventory file
+====
+
+.Task 3 - Creation of an Inventory file
+[%collapsible]
+====
 In the **VSCode Editor** screen, the directory opened by default in the left panel is ansible-files. This directory will contain our inventory file and future playbooks.
 
 Currently, the only file residing in the `ansible-files` directory is `ansible-navigator.yml`. This file contains all the settings to properly run this lab. Feel free to look at the file, but **please don't make any changes to it**, as we won't cover those settings this time.
@@ -55,10 +67,8 @@ Currently, the only file residing in the `ansible-files` directory is `ansible-n
 image::create_file.png[Create File]
 
 +
-[NOTE]
-====
-The `inventory` filename should have no extension and remember to save!
-====
+NOTE: The `inventory` filename should have no extension and remember to save!
+
 
 * In the `inventory` file, input the following content:
 +
@@ -68,14 +78,13 @@ The `inventory` filename should have no extension and remember to save!
 node1
 node2
 ----
-
-
-=== ☑️ Task 4 - How to use Ansible Navigator?
-
-[NOTE]
 ====
-Switch to the **Control** top tab for the Terminal
+
+.Task 4 - How to use Ansible Navigator?
+[%collapsible]
 ====
+
+NOTE: Switch to the **Control** top tab for the Terminal
 
 
 `ansible-navigator` comes with an interactive mode by default that allows you to explore the different options through a Terminal UI, but for this lab, we will set the mode of `ansible-navigator` to `stdout`, the standard output. We have configured this as the default in the `ansible-navigator.yml` settings file.
@@ -118,18 +127,19 @@ ansible-navigator inventory --list
 ----
 
 +
-[NOTE]
-====
-If the `--list` is too verbose, the option of `--graph` can be used to provide a more condensed version of `--list`.
-
+NOTE: If the `--list` is too verbose, the option of `--graph` can be used to provide a more condensed version of `--list`.
 ansible-navigator inventory --graph
-====
+
 
 In the following challenges you will familiarize yourself with the `ansible-navigator run` command that allows us to run Ansible playbooks.
+====
 
-== ✅ Next Challenge
+=== ✅ Next Challenge
 Press the `Next` button below to go to the next challenge once you’ve completed the task.
 
-== 🐛 Encountered an issue?
-If you have encountered an issue or have noticed something not quite right, please open an issue on the https://github.com/ansible/instruqt/issues/new?labels=writing-first-playbook&title=Issue+with+Writing+First+Playbook+slug+ID:+playbook-inventory&assignees=leogallego[Ansible Instruqt repository].
-
+=== 🐛 Encountered an issue?
+.Click for details
+[%collapsible]
+====
+If you have encountered an issue or have noticed something not quite right, please open an issue on the TODO.
+====

@@ -30,9 +30,9 @@
 
 - name: Setup nodes
   hosts: nodes
+  become: true
   tasks:
     - name: Install packages
-      become: true
       ansible.builtin.dnf:
         name: cups-filesystem
         state: present
