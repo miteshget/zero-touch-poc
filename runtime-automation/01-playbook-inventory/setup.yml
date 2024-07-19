@@ -28,8 +28,8 @@
         - name: Stop register warning
           ansible.builtin.replace:
             path: /etc/yum/pluginconf.d/subscription-manager.conf
-            regexp: 'enable*'
-            replace: 'enabled=0'
+            regexp: 'enabled*$'
+            replace: 'enabled = 0'
 
     - name: Create directory
       ansible.builtin.file:
@@ -92,3 +92,13 @@
       loop:
         - /home/{{ USER }}/.ansible-navigator.yml
         - /home/{{ USER }}/ansible-files/ansible-navigator.yml
+
+- name: Setup nodes
+  hosts: nodes
+  become: true
+  tasks:
+    - name: Install packages
+      ansible.builtin.replace:
+        path: /etc/yum/pluginconf.d/subscription-manager.conf
+        regexp: 'enabled*$'
+        replace: 'enabled = 0'
