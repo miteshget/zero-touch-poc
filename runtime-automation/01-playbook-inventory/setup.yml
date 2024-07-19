@@ -28,7 +28,7 @@
         - name: Stop register warning
           ansible.builtin.replace:
             path: /etc/yum/pluginconf.d/subscription-manager.conf
-            regexp: 'enabled*$'
+            regexp: 'enabled.*$'
             replace: 'enabled = 0'
 
     - name: Create directory
@@ -100,5 +100,5 @@
     - name: Install packages
       ansible.builtin.replace:
         path: /etc/yum/pluginconf.d/subscription-manager.conf
-        regexp: 'enabled*$'
+        regexp: 'enabled.*$'
         replace: 'enabled = 0'
