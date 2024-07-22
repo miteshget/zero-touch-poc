@@ -119,16 +119,17 @@ WARNING: Pay attention to indentation and the spaces
 ======
 
 
+
 == Embracing the Next Challenge
 ======
 .✅ Next Challenge
 [%collapsible]
 =====
-Once you've completed the task, press the *Next* button below to proceed to the next challenge. 
+Once you've completed the task, press the image:next.png[Next, 50] button at the bottom to proceed to the next challenge. 
 
-* The *Next* button will validate your steps and move you to the next challenge or chapter. If any steps are missing, an error will be produced, allowing you to recheck your steps before clicking the Next button again to continue.
+* The image:next.png[Next, 50] button will validate your steps and move you to the next challenge or chapter. If any steps are missing, an error will be produced, allowing you to recheck your steps before clicking the Next button again to continue.
 
-* You also have the option to automatically solve a challenge or chapter by clicking the *Solve* button, which will complete the exercises for you.
+* You also have the option to automatically solve a challenge or chapter by clicking the image:solve.png[Solve, 55] button, which will complete the exercises for you.
 =====
 ======
 

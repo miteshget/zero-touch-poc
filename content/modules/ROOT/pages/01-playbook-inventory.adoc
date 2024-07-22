@@ -1,5 +1,4 @@
 :sectnums:
-
 = 1.0 - The basics & creating an inventory
 
 == Understanding The Lab Environment
@@ -13,17 +12,17 @@ Before we begin, some basic tips to improve your lab experience:
 
 . In the left sidebar, you will find the different sections. In each chapter, there will be an introduction to the challenge and the related tasks below. The sections can be collapsed and expanded by clicking on them.
 +
-image::image.png[image.png]
+image::collasped.png[Collasped, 90%, align="center"]
 
 . When we refer to the **VSCode Editor** or **Control** tabs, we mean the ones at the top bar. **VSCode Editor** will show the **Visual Studio Code** screen where you can edit the files, and the **Control** one will show a command line interface (CLI) or **Terminal** to run the playbooks and checks.
 +
-image::image.png[image.png]
+image::tabs.png[Tabs,90%, align="center"]
 
 . Each "code box" for playbooks and commands has a copy & paste feature, where if you click on the box, the content will be copied to the clipboard. You can paste this into the VSCode Editor if you run into problems typing.
 
-. When you finish with a challenge (or chapter), you need to click the blue **Next** button to move to the next. This will review the steps.
+. When you finish with a challenge (or chapter), you need to click the image:next.png[Next, 50] button to move to the next. This will review the steps.
 
-. You have the option to **Solve** a challenge or chapter, keep in mind this will auto-solve the exercises.
+. You have the option to image:solve.png[Solve, 55] a challenge or chapter, keep in mind this will auto-solve the exercises.
 ====
 =====
 
@@ -70,7 +69,7 @@ Currently, the only file residing in the *ansible-files* directory is *ansible-n
 
 . Right click in a blank space below the existing files and create a new file named *inventory*.
 +
-image::create_file.png[Create File]
+image::vscode_inventory.png[Inventory, 90%, align="center"]
 
 +
 NOTE: The *inventory* filename should have no extension and remember to save!
@@ -148,11 +147,11 @@ ansible-navigator inventory --graph
 .✅ Next Challenge
 [%collapsible]
 =====
-Once you've completed the task, press the *Next* button below to proceed to the next challenge. 
+Once you've completed the task, press the image:next.png[Next, 50] button at the bottom to proceed to the next challenge. 
 
-* The *Next* button will validate your steps and move you to the next challenge or chapter. If any steps are missing, an error will be produced, allowing you to recheck your steps before clicking the Next button again to continue.
+* The image:next.png[Next, 50] button will validate your steps and move you to the next challenge or chapter. If any steps are missing, an error will be produced, allowing you to recheck your steps before clicking the Next button again to continue.
 
-* You also have the option to automatically solve a challenge or chapter by clicking the *Solve* button, which will complete the exercises for you.
+* You also have the option to automatically solve a challenge or chapter by clicking the image:solve.png[Solve, 55] button, which will complete the exercises for you.
 =====
 ======
 

@@ -303,12 +303,12 @@ Congratulations on completing the lab "Writing your First Playbook"!
 .✅ Click End
 [%collapsible]
 =====
-Once you've completed the task, press the *End* button below to Complete the challenge. 
+Once you've completed the task, press the image:end.png[End, 50] button below to Complete the challenge. 
 
 
-* The *End* button will validate your steps to complete challenge or chapter. If any steps are missing, an error will be produced, allowing you to recheck your steps before clicking the End button again to complete.
+* The image:end.png[End, 50] button will validate your steps to complete challenge or chapter. If any steps are missing, an error will be produced, allowing you to recheck your steps before clicking the End button again to complete.
 
-* You also have the option to automatically solve a challenge or chapter by clicking the *Solve* button, which will complete the exercises for you.
+* You also have the option to automatically solve a challenge or chapter by clicking the image:solve.png[Solve, 55] button, which will complete the exercises for you.
 =====
 ======
 
