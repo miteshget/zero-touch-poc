@@ -64,11 +64,11 @@ The inventory may include a list of hostnames or IP addresses associated with th
 .☑️ Task 3 - Creation of an Inventory file
 [%collapsible]
 ====
-In the **VSCode Editor** screen, the directory opened by default in the left panel is ansible-files. This directory will contain our inventory file and future playbooks.
-
+. In the **VSCode Editor** screen, the directory opened by default in the left panel is ansible-files. This directory will contain our inventory file and future playbooks.
++
 Currently, the only file residing in the *ansible-files* directory is *ansible-navigator.yml*. This file contains all the settings to properly run this lab. Feel free to look at the file, but **please don't make any changes to it**, as we won't cover those settings this time.
 
-* Right click in a blank space below the existing files and create a new file named *inventory*.
+. Right click in a blank space below the existing files and create a new file named *inventory*.
 +
 image::create_file.png[Create File]
 
@@ -76,7 +76,7 @@ image::create_file.png[Create File]
 NOTE: The *inventory* filename should have no extension and remember to save!
 
 
-* In the *inventory* file, input the following content:
+. In the *inventory* file, input the following content:
 +
 [source,text]
 ----
@@ -95,23 +95,23 @@ node2
 NOTE: Switch to the *Control* top tab for the Terminal
 
 
-*ansible-navigator* comes with an interactive mode by default that allows you to explore the different options through a Terminal UI, but for this lab, we will set the mode of *ansible-navigator* to *stdout*, the standard output. We have configured this as the default in the *ansible-navigator.yml* settings file.
+. *ansible-navigator* comes with an interactive mode by default that allows you to explore the different options through a Terminal UI, but for this lab, we will set the mode of *ansible-navigator* to *stdout*, the standard output. We have configured this as the default in the *ansible-navigator.yml* settings file.
 
-* Change to the *ansible-files* directory
+. Change to the *ansible-files* directory
 +
 [source,shell]
 ----
 cd ansible-files
 ----
 
-* and run the following commands to get a listing of what is available within our recently created *inventory*:
+. Run the following commands to get a listing of what is available within our recently created *inventory*:
 +
 [source,shell]
 ----
 ansible-navigator inventory --list
 ----
 
-* The output should look like this:
+. The output should look like this:
 +
 [source,json]
 ----
@@ -139,7 +139,7 @@ NOTE: If the *--list* is too verbose, the option of *--graph* can be used to pro
 ansible-navigator inventory --graph
 
 
-In the following challenges you will familiarize yourself with the *ansible-navigator run* command that allows us to run Ansible playbooks.
+. In the following challenges you will familiarize yourself with the *ansible-navigator run* command that allows us to run Ansible playbooks.
 ====
 =====
 
@@ -150,7 +150,7 @@ In the following challenges you will familiarize yourself with the *ansible-navi
 =====
 Once you've completed the task, press the *Next* button below to proceed to the next challenge. 
 
-* The blue *Next* button will validate your steps and move you to the next challenge or chapter. If any steps are missing, an error will be produced, allowing you to recheck your steps before clicking the Next button again to continue.
+* The *Next* button will validate your steps and move you to the next challenge or chapter. If any steps are missing, an error will be produced, allowing you to recheck your steps before clicking the Next button again to continue.
 
 * You also have the option to automatically solve a challenge or chapter by clicking the *Solve* button, which will complete the exercises for you.
 =====

@@ -1,19 +1,22 @@
+:sectnums:
 = 1.9 - Roles
 
-This exercise builds upon previous exercises by guiding you through the creation of an Ansible role to configure Apache (`httpd`). You'll integrate variables, handlers, and a Jinja2 template for a custom `index.html`, demonstrating the encapsulation of tasks into a reusable structure for automation.
+This exercise builds upon previous exercises by guiding you through the creation of an Ansible role to configure Apache (*httpd*). You'll integrate variables, handlers, and a Jinja2 template for a custom *index.html*, demonstrating the encapsulation of tasks into a reusable structure for automation.
 
-== Task 1 - Create a Basic Role Directory Structure
 
-[NOTE]
-====
-In the **Control** tab
-====
+== Hands-On Experience
 
-* Ansible looks for roles in a subdirectory called `roles` in the project directory by default. To create a new role, use `ansible-galaxy`.
+======
+.☑️ Task 1 - Create a Basic Role Directory Structure
+[%collapsible]
+=====
+NOTE: I the **Control** tab
+
+. Ansible looks for roles in a subdirectory called *roles* in the project directory by default. To create a new role, use *ansible-galaxy*.
 +
 NOTE: Ansible Galaxy is your hub for finding, reusing and sharing Ansible content.
 
-* In the ansible-files create a roles directory.
+. In the ansible-files create a roles directory.
 +
 [source,shell]
 ----
@@ -25,22 +28,22 @@ cd ansible-files
 mkdir roles
 ----
 
-* Once the roles directory is created, use ansible-galaxy to build a role labeled apache
+. Once the roles directory is created, use ansible-galaxy to build a role labeled apache
 +
 [source,shell]
 ----
 ansible-galaxy init --offline roles/apache
 ----
+=====
+======
 
+======
+.☑️ Task 2 - View apache Role Directory Structure
+[%collapsible]
+=====
+NOTE: In the **Control** tab
 
-== Task 2 - View apache Role Directory Structure
-
-[NOTE]
-====
-In the **Control** tab
-====
-
-* Use the `tree` command to view the role directory structure.
+. Use the *tree* command to view the role directory structure.
 +
 [source,shell]
 ----
@@ -48,6 +51,7 @@ tree roles
 ----
 
 +
+.Output of the tree command
 [source,shell]
 ----
 roles/
@@ -70,16 +74,17 @@ roles/
     └── vars
         └── main.yml
 ----
+=====
+======
 
 
-== Task 3 - Edit the roles/apache/vars/main.yml file
+======
+.☑️ Task 3 - Edit the roles/apache/vars/main.yml file
+[%collapsible]
+=====
+NOTE: In **VSCode Editor** tab
 
-[NOTE]
-====
-In **VSCode Editor** tab
-====
-
-* Edit `ansible-files/roles/apache/vars/main.yml`:
+. Edit *ansible-files/roles/apache/vars/main.yml*:
 +
 [source,yaml]
 ----
@@ -88,21 +93,26 @@ In **VSCode Editor** tab
 apache_package_name: httpd
 apache_service_name: httpd
 ----
+=====
+======
 
-== Task 4 - Edit the roles/apache/tasks/main.yml file
 
-Previously we would include all of our tasks within the Ansible playbook itself. With Ansible Roles, we include the tasks within the roles/apache/tasks/main.yml file. This file only has the tasks and is not a complete playbook.
+======
+.☑️ Task 4 - Edit the roles/apache/tasks/main.yml file
+[%collapsible]
+=====
+. Previously we would include all of our tasks within the Ansible playbook itself. With Ansible Roles, we include the tasks within the roles/apache/tasks/main.yml file. This file only has the tasks and is not a complete playbook.
 
-* For this challenge, the roles/apache/tasks/main.yml file includes tasks that do the following:
+. For this challenge, the roles/apache/tasks/main.yml file includes tasks that do the following:
 +
-** Make sure httpd is installed
-** Make sure httpd is started and enabled
-** Make sure firewalld is installed
-** Make sure firewalld is started and enabled
-** Allow HTTPS traffic on web servers
+.. Make sure httpd is installed
+.. Make sure httpd is started and enabled
+.. Make sure firewalld is installed
+.. Make sure firewalld is started and enabled
+.. Allow HTTPS traffic on web servers
 
 
-* Edit `ansible-files/roles/apache/tasks/main.yml` to include tasks:
+. Edit *ansible-files/roles/apache/tasks/main.yml* to include tasks:
 +
 [source,yaml]
 ----
@@ -138,10 +148,15 @@ Previously we would include all of our tasks within the Ansible playbook itself.
   when: inventory_hostname in groups['web']
   notify: Reload Firewall
 ----
+=====
+======
 
-== ☑️ Task 5 - Create the handlers
 
-* In `ansible-files/roles/apache/handlers/main.yml`, create a handler to restart firewalld if its configuration changes:
+======
+.☑️ Task 5 - Create the handlers
+[%collapsible]
+=====
+. In *ansible-files/roles/apache/handlers/main.yml*, create a handler to restart firewalld if its configuration changes:
 +
 [source,yaml]
 ----
@@ -152,17 +167,17 @@ Previously we would include all of our tasks within the Ansible playbook itself.
     name: firewalld
     state: reloaded
 ----
+=====
+======
 
 
+======
+.☑️ Task 6 - Creating an index.html Jinja2 template file
+[%collapsible]
+=====
+. Ansible uses Jinja2 templating to enable dynamic expressions and access to variables and facts. You can use templating with the *template* module. We will use a Jinja2 template to create a custom *index.html*. Let's create the file and store it in the apache role directory:
 
-== ☑️ Task 6 - Creating an index.html Jinja2 template file
-
-
-Ansible uses Jinja2 templating to enable dynamic expressions and access to variables and facts. You can use templating with the `template` module. We will use a Jinja2 template to create a custom `index.html.`
-
-Let's create the file and store it in the apache role directory:
-
-* Create  `ansible-files/roles/apache/templates/index.html.j2` with the following content:
+. Create  *ansible-files/roles/apache/templates/index.html.j2* with the following content:
 +
 [source,html]
 ----
@@ -177,11 +192,16 @@ Let's create the file and store it in the apache role directory:
 ----
 
 
-* You will notice we are using an Ansible variable in that HTML code above: `{{ ansible_hostname }}`, this will be replaced at runtime by the corresponding value.
+. You will notice we are using an Ansible variable in that HTML code above: *{{ ansible_hostname }}*, this will be replaced at runtime by the corresponding value.
+=====
+======
 
-== ☑️ Task 7 - Add the deploy index.html task into the tasks/main.yml file
 
-* In the `ansible-files/roles/apache/tasks/main.yml` file, add the following task at the end:
+======
+.☑️ Task 7 - Add the deploy index.html task into the tasks/main.yml file
+[%collapsible]
+=====
+. In the *ansible-files/roles/apache/tasks/main.yml* file, add the following task at the end:
 +
 [IMPORTANT]
 ====
@@ -197,16 +217,17 @@ Pay atention to indentation. When pressing enter in VSCode some extra spaces mig
     dest: /var/www/html/index.html
 
 ----
+=====
+======
 
 
-== ☑️ Task 6 - Create a new playbook called deploy_apache.yml to use the new `apache` role
-
-* Create the `deploy_apache.yml` playbook in the `ansible-files` directory with the following content:
+======
+.☑️ Task 6 - Create a new playbook called deploy_apache.yml to use the new *apache* role
+[%collapsible]
+=====
+. Create the *deploy_apache.yml* playbook in the *ansible-files* directory with the following content:
 +
-[IMPORTANT]
-====
-All we need to do to use our role is call it under the `roles:` declarative with its name `apache`
-====
+IMPORTANT: All we need to do to use our role is call it under the *roles:* declarative with its name *apache*
 
 +
 [source,yaml]
@@ -218,22 +239,31 @@ All we need to do to use our role is call it under the `roles:` declarative with
   roles:
     - apache
 ----
+=====
+======
 
 
-== ☑️ Task 9 - Run Ansible playbook
-
+======
+.☑️ Task 9 - Run Ansible playbook
+[%collapsible]
+=====
 NOTE: In the **Control** tab
 
+. Run the playbook.
 +
 [source,shell]
 ----
 ansible-navigator run deploy_apache.yml
 ----
+=====
+======
 
 
-== ☑️ Task 10 - Verify the results
-
-* Once the playbook has completed, verify that httpd is indeed running on all the web nodes.
+======
+.☑️ Task 10 - Verify the results
+[%collapsible]
+=====
+. Once the playbook has completed, verify that httpd is indeed running on all the web nodes.
 
 +
 *Check node1:*
@@ -248,6 +278,9 @@ ssh node1 "systemctl status httpd"
 ----
 curl http://node1
 ----
+
++
+*Check node2:*
 +
 [source,shell]
 ----
@@ -258,16 +291,32 @@ ssh node2 "systemctl status httpd"
 ----
 curl http://node2
 ----
+=====
+======
+
+
 
 == Congratulations!
-
 Congratulations on completing the lab "Writing your First Playbook"!
 
-[IMPORTANT]
-====
-Please click the [End] button at the bottom to complete the lab and leave a review. Your feedback is valuable!
-====
+======
+.✅ Click End
+[%collapsible]
+=====
+Once you've completed the task, press the *End* button below to Complete the challenge. 
 
-== 🐛 Encountered an issue?
 
-If you have encountered an issue or have noticed something not quite right, please [open an issue](https://github.com/ansible/instruqt/issues/new?labels=writing-first-playbook&title=Issue+with+Writing+First+Playbook+slug+ID:+roles&assignees=leogallego).
+* The *End* button will validate your steps to complete challenge or chapter. If any steps are missing, an error will be produced, allowing you to recheck your steps before clicking the End button again to complete.
+
+* You also have the option to automatically solve a challenge or chapter by clicking the *Solve* button, which will complete the exercises for you.
+=====
+======
+
+
+======
+.🐛 Encountered an issue?
+[%collapsible]
+=====
+If you have encountered an issue or have noticed something not quite right, TODO
+=====
+======

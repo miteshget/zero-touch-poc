@@ -1,18 +1,19 @@
-== 1.6 Handlers
+:sectnums:
+= 1.6 Handlers
 
 Handlers are used for tasks that should only run when notified by another task. Typically, they are used to restart services after a configuration change.
 
 Let's say we want to ensure the firewall is configured correctly on all web servers and then reload the firewall service to apply any new settings. We'll define a handler that reloads the firewall service and is notified by a task that ensures the desired firewall rules are in place:
 
+== Hands-On Experience
 
-== ☑️ Task 1 - Extend the `system_setup.yml` playbook to add the firewall tasks
+======
+.☑️ Task 1 - Extend the system_setup.yml playbook to add the firewall tasks
+[%collapsible]
+=====
+NOTE: In the *VSCode Editor* tab
 
-[NOTE]
-====
-In the *VSCode Editor* tab
-====
-
-* Open the *Editor* tab, and edit the `system_setup.yml` playbook. Make sure you add the new tasks below related to the firewall. Remember to check the indentation!
+. Open the *Editor* tab, and edit the *system_setup.yml* playbook. Make sure you add the new tasks below related to the firewall. Remember to check the indentation!
 +
 [source,yaml]
 ----
@@ -80,101 +81,122 @@ In the *VSCode Editor* tab
         state: reloaded
 ----
 
-* Understanding the playbook:
+. Understanding the playbook:
 +
-** The `notify` section calls the handler only if the "Allow HTTP traffic on web servers" task makes any changes in one of the hosts. That way the service is only reloaded if needed - and not each time the playbook is run.
-** The `handlers` section defines a task that is only run on notification. And the `name` field is used to call it from a task.
+* The *notify* section calls the handler only if the "Allow HTTP traffic on web servers" task makes any changes in one of the hosts. That way the service is only reloaded if needed - and not each time the playbook is run.
+
+* The *handlers* section defines a task that is only run on notification. And the *name* field is used to call it from a task.
 
 +
-[WARNING]
-====
-Notice how the `name` of the `handlers` is used within the `notify` section of the "Allow HTTP traffic on web servers" configuration task. This ensures that the proper handler is executed as there can be multiple handlers within an Ansible playbook.
-====
+WARNING: Notice how the *name* of the *handlers* is used within the *notify* section of the "Allow HTTP traffic on web servers" configuration task. This ensures that the proper handler is executed as there can be multiple handlers within an Ansible playbook.
+=====
+======
 
-== ☑️ Task 2 - Run the `system_setup.yml` playbook
 
-[NOTE]
-====
-In the **Control** tab
-====
+======
+.☑️ Task 2 - Run the system_setup.yml playbook
+[%collapsible]
+=====
 
-* Change directory to `ansible-files` and run the playbook:
+NOTE: In the **Control** tab
+
+
+. Change directory to *ansible-files* and run the playbook:
 +
-[source,cmd]
+[source,shell]
 ----
 cd ansible-files
 ----
 
 +
-[source,cmd]
+[source,shell]
+----
+ansible-navigator run system_setup.yml
+----
+=====
+======
+
+
+======
+.☑️ Task 3 - Run the system_setup.yml playbook again to test the handler
+[%collapsible]
+=====
+NOTE: In the **Control** tab
+
+
+. Run the playbook again.
++
+[source,shell]
 ----
 ansible-navigator run system_setup.yml
 ----
 
 
-== ☑️ Task 3 - Run the `system_setup.yml` playbook again to test the handler
-
-[NOTE]
-====
-In the **Control** tab
-====
-
-* Run the playbook again.
+. Notice anything with the output?
 +
-[source,cmd]
-----
-ansible-navigator run system_setup.yml
-----
+* Nothing was changed, thus the playbook ran and you will notice the PLAY RECAP does not show any *changed* lines. The firewall was not restarted as there were no changes.
+=====
+======
 
 
-* Notice anything with the output?
-+
-Nothing was changed, thus the playbook ran and you will notice the PLAY RECAP does not show any `changed` lines. The firewall was not restarted as there were no changes.
+======
+.☑️ Task 4 - Verify Apache listening on port 80
+[%collapsible]
+=====
 
-== ☑️ Task 4 - Verify Apache listening on port 80
+NOTE: Check the new **Node1 Web** tab at the top, next to the **Control** tab.
 
 
-[NOTE]
-====
-Check the new **Node1 Web** tab at the top, next to the **Control** tab.
-====
-
-* You should see the following webpage after the playbook has run (give it a few seconds or click the small arrow inside the tab next to the **Node1 Web** title if you are seeing another message):
+. You should see the following webpage after the playbook has run (give it a few seconds or click the small arrow inside the tab next to the **Node1 Web** title if you are seeing another message):
 +
 image::image.png[]
 
 +
-[NOTE]
-====
-Alternatively, you can check in the CLI using the **Control** tab.
-====
+NOTE: Alternatively, you can check in the CLI using the **Control** tab.
 
-* For the CLI check, as the output would be too long, we are using `grep` to get just a few lines:
+. For the CLI check, as the output would be too long, we are using *grep* to get just a few lines:
 +
-[source,cmd]
+[source,shell]
 ----
 curl http://node1 | grep "HTTP Server"
 ----
 
-* Now let's try with `node3`, the server in the `[database]` group:
+. Now let's try with *node3*, the server in the *[database]* group:
 +
-[source,cmd]
+[source,shell]
 ----
 curl http://node3 
 ----
 
 
-* The output should look like this:
+. The output should look like this:
 +
 [source,textinfo]
 ----
 curl: (7) Failed to connect to node3 port 80: Connection refused
 ----
+=====
+======
 
 
+== Embracing the Next Challenge
+======
+.✅ Next Challenge
+[%collapsible]
+=====
+Once you've completed the task, press the *Next* button below to proceed to the next challenge. 
 
-== ✅ Next Challenge
-Press the `Next` button below to go to the next challenge once you’ve completed the task.
+* The *Next* button will validate your steps and move you to the next challenge or chapter. If any steps are missing, an error will be produced, allowing you to recheck your steps before clicking the Next button again to continue.
 
-== 🐛 Encountered an issue?
-If you have encountered an issue or have noticed something not quite right, please open an issue (https://github.com/ansible/instruqt/issues/new?labels=writing-first-playbook&title=Issue+with+Writing+First+Playbook+slug+ID:+16-handlers&assignees=leogallego).
+* You also have the option to automatically solve a challenge or chapter by clicking the *Solve* button, which will complete the exercises for you.
+=====
+======
+
+
+======
+.🐛 Encountered an issue?
+[%collapsible]
+=====
+If you have encountered an issue or have noticed something not quite right, TODO
+=====
+======

@@ -1,21 +1,23 @@
+:sectnums:
 == 1.7 - Loops in Ansible
 
 Loops in Ansible allow you to perform a task multiple times with different values. This feature is particularly useful for tasks like creating multiple user accounts in our given example.
 
-In this challenge, you will create a simple loop that generates three new users on `node1`, instead of a single one.
+In this challenge, you will create a simple loop that generates three new users on *node1*, instead of a single one.
 
-== ☑️ Task 1 - Create a new playbook
+== Hands-On Experience
 
-[NOTE]
-====
-In the *VSCode Editor* tab
-====
+======
+.☑️ Task 1 - Create a new playbook
+[%collapsible]
+=====
+NOTE: In the *VSCode Editor* tab
 
-* Create the file `loop_users.yml`. This can be done by simply right clicking and selecting 'New File'.
+. Create the file *loop_users.yml*. This can be done by simply right clicking and selecting 'New File'.
 
-* The following playbook takes advantage of the `ansible.builtin.user` module to create users on the `node1` host.
+. The following playbook takes advantage of the *ansible.builtin.user* module to create users on the *node1* host.
 
-* Notice the `name: "{{ item }}"`? This is a special variable named `{{ item }}`. This variable `item` gets replaced with the values found under the `loop:` statement.
+. Notice the *name: "{{ item }}"*? This is a special variable named *{{ item }}*. This variable *item* gets replaced with the values found under the *loop:* statement.
 +
 [source,yaml]
 ----
@@ -36,19 +38,20 @@ In the *VSCode Editor* tab
         - carol
 ----
 
-* What changed from our original task creating a single user?
+. What changed from our original task creating a single user?
 +
-** Loop Directive: The `loop` keyword is used to iterate over a list of items. In this case, the list contains the names of users we want to create: alice, bob, and carol.
-** User Creation with Loop: Instead of creating a single user, the modified task now iterates over each item in the loop list. The `{{ item }}` placeholder is dynamically replaced with each username in the list on each iteration, so the `ansible.builtin.user` module creates each user in turn.
+* Loop Directive: The *loop* keyword is used to iterate over a list of items. In this case, the list contains the names of users we want to create: alice, bob, and carol.
+* User Creation with Loop: Instead of creating a single user, the modified task now iterates over each item in the loop list. The *{{ item }}* placeholder is dynamically replaced with each username in the list on each iteration, so the *ansible.builtin.user* module creates each user in turn.
+=====
+======
 
-== ☑️ Task 2 - Run the `loop_users.yml` playbook
+======
+.☑️ Task 2 - Run the loop_users.yml playbook
+[%collapsible]
+=====
+NOTE: In the *Control* tab
 
-[NOTE]
-====
-In the *Control* tab
-====
-
-* Change directory to `ansible-files` and run the `loop_users.yml` playbook.
+. Change directory to *ansible-files* and run the *loop_users.yml* playbook.
 +
 [source,shell]
 ----
@@ -60,16 +63,33 @@ cd ansible-files
 ansible-navigator run loop_users.yml
 ----
 
-* Understand the playbook and the output:
+. Understand the playbook and the output:
 +
-** The names are not provided to the `ansible.builtin.user` module directly. Instead, there is only a variable called `{{ item }}` for the parameter name.
-** The `loop` keyword lists the actual user names. Those replace the `{{ item }}` during the actual execution of the playbook.
-** During execution the task is only listed once, but there are three changes listed underneath it.
+* The names are not provided to the *ansible.builtin.user* module directly. Instead, there is only a variable called *{{ item }}* for the parameter name.
+* The *loop* keyword lists the actual user names. Those replace the *{{ item }}* during the actual execution of the playbook.
+* During execution the task is only listed once, but there are three changes listed underneath it.
+=====
+======
 
-== ✅ Next Challenge
 
-Press the `Next` button below to go to the next challenge once you’ve completed the task.
+== Embracing the Next Challenge
+======
+.✅ Next Challenge
+[%collapsible]
+=====
+Once you've completed the task, press the *Next* button below to proceed to the next challenge. 
 
-== 🐛 Encountered an issue?
+* The *Next* button will validate your steps and move you to the next challenge or chapter. If any steps are missing, an error will be produced, allowing you to recheck your steps before clicking the Next button again to continue.
 
-If you have encountered an issue or have noticed something not quite right, please open an issue on GitHub: https://github.com/ansible/instruqt/issues/new?labels=writing-first-playbook&title=Issue+with+Writing+First+Playbook+slug+ID:+17-loops&assignees=leogallego.
+* You also have the option to automatically solve a challenge or chapter by clicking the *Solve* button, which will complete the exercises for you.
+=====
+======
+
+
+======
+.🐛 Encountered an issue?
+[%collapsible]
+=====
+If you have encountered an issue or have noticed something not quite right, TODO
+=====
+======

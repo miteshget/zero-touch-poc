@@ -1,22 +1,31 @@
+:sectnums:
 = 1.8 - Templates
 
 In this challenge, you will create a Jinja2 template. Ansible uses Jinja2 templating to modify files before they are distributed to managed hosts. Jinja2 is one of the most used template engines for Python (http://jinja.pocoo.org/). You'll learn how to craft templates that incorporate host-specific data, enabling the creation of tailored configuration files for each managed host.
 
-  In the following example, let's create a template for the Message of the Day (MOTD) that includes dynamic host information.
+In the following example, let's create a template for the Message of the Day (MOTD) that includes dynamic host information.
 
-== Task 1 - Create a templates directory
+== Hands-On Experience
 
+======
+.☑️ Task 1 - Create a templates directory
+[%collapsible]
+=====
 NOTE: In the *VSCode Editor* tab
 
-In the `ansible-files` directory, create the `templates` subdirectory (right-click and select 'New Folder' in VSCode) to store our new template files.
+. In the *ansible-files* directory, create the *templates* subdirectory (right-click and select 'New Folder' in VSCode) to store our new template files.
+=====
+======
 
-== Task 2 - Create the motd.j2 jinja file
 
-*Template files end with a `.j2` file extension and mix static content with dynamic placeholders enclosed in curly braces `{{ }}`.
+======
+.☑️ Task 2 - Create the motd.j2 jinja file
+[%collapsible]
+=====
 
-* Within the `ansible-files/templates` directory, create the file `motd.j2` with the following content:
+. Template files end with a *.j2* file extension and mix static content with dynamic placeholders enclosed in curly braces *{{ }}*. Within the *ansible-files/templates* directory, create the file *motd.j2* with the following content:
 +
-NOTE: You can right-click over the `templates` directory in VSCode and use "New File".
+NOTE: You can right-click over the *templates* directory in VSCode and use "New File".
 +
 [source,jinja2]
 ----
@@ -26,13 +35,18 @@ Architecture: {{ ansible_architecture }}
 ----
 
 
-* The template file contains the basic text that will later be copied over to the hosts. It contains variables that will be replaced on the target machines individually. It will dynamically display the hostname, OS distribution, version, and architecture of each managed host.
+. The template file contains the basic text that will later be copied over to the hosts. It contains variables that will be replaced on the target machines individually. It will dynamically display the hostname, OS distribution, version, and architecture of each managed host.
+=====
+======
 
-== Task 3 - Update the system_setup.yml playbook to include the motd
 
+======
+.☑️ Task 3 - Update the system_setup.yml playbook to include the motd
+[%collapsible]
+=====
 NOTE: In the **VSCode Editor** tab
 
-* Open the `system_setup.yml` playbook and modify it to include the following task right before the `handlers` section:
+. Open the *system_setup.yml* playbook and modify it to include the following task right before the *handlers* section:
 +
 WARNING: We are only showing the task to add. Pay attention to the indentation and maintain the same format as the other tasks, leave a blank line above and a blank line below the task!
 +
@@ -45,13 +59,18 @@ WARNING: We are only showing the task to add. Pay attention to the indentation a
 ----
 
 +
-IMPORTANT: If you run into issues adding the task, you will find the full `system_setup.yml` playbook at the end of this sidebar. Look for the **💡 Solution playbook** section.
+IMPORTANT: If you run into issues adding the task, you will find the full *system_setup.yml* playbook at the end of this sidebar. Look for the **💡 Solution playbook** section.
+=====
+======
 
-== Task 4 - Run the playbook
 
+======
+.☑️ Task 4 - Run the playbook
+[%collapsible]
+=====
 NOTE: In the **Control** tab
 
-* Run the `system_setup.yml` playbook again:
+. Run the *system_setup.yml* playbook again:
 +
 [source,shell]
 ----
@@ -63,18 +82,22 @@ cd ansible-files
 ----
 ansible-navigator run system_setup.yml
 ----
+=====
+======
 
-== Task 5 - Verify message of the day
 
-* Login to `node1` via SSH and check the message of the day content.
+======
+.☑️ Task 5 - Verify message of the day
+[%collapsible]
+=====
+. Login to *node1* via SSH and check the message of the day content.
 +
 [source,shell]
 ----
 ssh node1
 ----
 
-
-* You should see a message similar to the one below (RHEL version might vary!)
+. You should see a message similar to the one below (RHEL version might vary!)
 +
 [source,ini]
 ----
@@ -85,8 +108,7 @@ Register this system with Red Hat Insights: insights-client --register
 Create an account or view all your systems at https://red.ht/insights-dashboard
 ----
 
-
-* You can now exit `node1` and test the same in `node2` to see the difference:
+. You can now exit *node1* and test the same in *node2* to see the difference:
 +
 [source,shell]
 ----
@@ -98,11 +120,14 @@ exit
 ----
 ssh node2
 ----
+=====
+======
 
 
-
-== 💡 Solution playbook
-
+======
+.💡 Solution playbook
+[%collapsible]
+=====
 [source,yaml]
 ----
 - name: Basic System Setup
@@ -173,11 +198,28 @@ handlers:
       name: firewalld
       state: reloaded
 ----
+=====
+======
 
-== Next Challenge
 
-Press the `Next` button below to go to the next challenge once you’ve completed the task.
+== Embracing the Next Challenge
+======
+.✅ Next Challenge
+[%collapsible]
+=====
+Once you've completed the task, press the *Next* button below to proceed to the next challenge. 
 
-== 🐛 Encountered an issue?
+* The *Next* button will validate your steps and move you to the next challenge or chapter. If any steps are missing, an error will be produced, allowing you to recheck your steps before clicking the Next button again to continue.
 
-If you have encountered an issue or have noticed something not quite right, please open an issue at https://github.com/ansible/instruqt/issues/new?labels=writing-first-playbook&title=Issue+with+Writing+First+Playbook+slug+ID:+playbook-templates&assignees=leogallego.
+* You also have the option to automatically solve a challenge or chapter by clicking the *Solve* button, which will complete the exercises for you.
+=====
+======
+
+
+======
+.🐛 Encountered an issue?
+[%collapsible]
+=====
+If you have encountered an issue or have noticed something not quite right, TODO
+=====
+======
