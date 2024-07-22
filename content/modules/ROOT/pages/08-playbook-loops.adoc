@@ -1,5 +1,5 @@
 :sectnums:
-== 1.7 - Loops in Ansible
+= 1.7 - Loops in Ansible
 
 Loops in Ansible allow you to perform a task multiple times with different values. This feature is particularly useful for tasks like creating multiple user accounts in our given example.
 

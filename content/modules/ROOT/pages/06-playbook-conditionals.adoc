@@ -1,5 +1,5 @@
 :sectnums:
-== 1.5 - Conditionals
+= 1.5 - Conditionals
 
 In the following challenges, we will cover the application of conditionals, handlers, and loops in Ansible playbooks. You'll learn to control task execution with conditionals, manage service responses with handlers, and efficiently tackle repetitive tasks using loops.
 
