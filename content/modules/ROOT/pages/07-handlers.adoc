@@ -1,5 +1,4 @@
 :sectnums:
-:imagedir: ../assets/images
 = 1.6 Handlers
 
 Handlers are used for tasks that should only run when notified by another task. Typically, they are used to restart services after a configuration change.

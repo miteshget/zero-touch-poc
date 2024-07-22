@@ -192,11 +192,11 @@ ssh node2
         src: templates/motd.j2
         dest: /etc/motd
 
-handlers:
-  - name: Reload Firewall
-    ansible.builtin.service:
-      name: firewalld
-      state: reloaded
+  handlers:
+    - name: Reload Firewall
+      ansible.builtin.service:
+        name: firewalld
+        state: reloaded
 ----
 =====
 ======
