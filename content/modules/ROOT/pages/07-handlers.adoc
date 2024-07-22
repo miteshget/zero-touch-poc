@@ -145,14 +145,14 @@ ansible-navigator run system_setup.yml
 [%collapsible]
 =====
 
-NOTE: Check the new **Node1 Web** tab at the top, next to the **Control** tab.
+// NOTE: Check the new **Node1 Web** tab at the top, next to the **Control** tab.
 
 
-. You should see the following webpage after the playbook has run (give it a few seconds or click the small arrow inside the tab next to the **Node1 Web** title if you are seeing another message):
-+
-image::image.png[]
+// . You should see the following webpage after the playbook has run (give it a few seconds or click the small arrow inside the tab next to the **Node1 Web** title if you are seeing another message):
+// +
+// image::image.png[]
 
-+
+// +
 NOTE: Alternatively, you can check in the CLI using the **Control** tab.
 
 . For the CLI check, as the output would be too long, we are using *grep* to get just a few lines:
