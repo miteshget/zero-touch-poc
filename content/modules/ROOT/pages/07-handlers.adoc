@@ -153,7 +153,7 @@ ansible-navigator run system_setup.yml
 // image::image.png[]
 
 // +
-NOTE: Alternatively, you can check in the CLI using the **Control** tab.
+NOTE: You can check in the CLI using the **Control** tab.
 
 . For the CLI check, as the output would be too long, we are using *grep* to get just a few lines:
 +
