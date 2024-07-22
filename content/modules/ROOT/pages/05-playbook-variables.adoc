@@ -1,23 +1,28 @@
+:sectnums:
 = 1.4 - Variables
 
 Variables in Ansible are powerful tools for making your playbooks flexible and reusable. They allow you to store and reuse values, making your playbooks more dynamic and adaptable.
 
 The creation and usage of variables involve a specific syntax:
 
-. *Defining Variables:* Variables are defined in the `vars` section of a playbook or in separate files for larger projects.
+. *Defining Variables:* Variables are defined in the *vars* section of a playbook or in separate files for larger projects.
 
 . *Variable Naming:* Variable names should be descriptive and adhere to rules such as:
 +
 .. Starting with a letter or underscore.
 .. Containing only letters, numbers, and underscores.
 
-. *Using Variables:* Variables are referenced in tasks using the double curly braces in quotes `"{{ variable_name }}"`. This syntax tells Ansible to replace it with the variable's value at runtime.
+. *Using Variables:* Variables are referenced in tasks using the double curly braces in quotes *"{{ variable_name }}"*. This syntax tells Ansible to replace it with the variable's value at runtime.
 
-== Task 1 - Creation of variables
 
-Update the `system_setup.yml` playbook to include and use a variable by adding a `vars:` section with a `user_name:` var and a `padawan` key value.
+== Hands-On Experience
 
-* Look for the changes in the playbook below:
+======
+.☑️ Task 1 - Creation of variables
+[%collapsible]
+=====
+
+. Update the *system_setup.yml* playbook to include and use a variable by adding a *vars:* section with a *user_name:* var and a *padawan* key value. Look for the changes in the playbook below:
 +
 [source,yaml]
 ----
@@ -41,35 +46,41 @@ Update the `system_setup.yml` playbook to include and use a variable by adding a
         create_home: true
 ----
 
-* In the playbook above you can notice we have defined a variable (`user_name`) and set a new user name (`padawan`). We later refer to this variable during the **Create a new user** task by using `"{{ user_name }}"`.
+. In the playbook above you can notice we have defined a variable (*user_name*) and set a new user name (*padawan*). We later refer to this variable during the **Create a new user** task by using *"{{ user_name }}"*.
+
+=====
+======
 
 
-== Task 2 - Run the modified playbook
+======
+.☑️ Task 2 - Run the modified playbook
+[%collapsible]
+=====
+NOTE: Switch to the **Control** top tab.
 
-[NOTE]
-====
-Switch to the **Control** top tab.
-====
 
-
-[source,cmd]
+[source,shell]
 ----
 cd ansible-files
 ----
 
-[source,cmd]
+[source,shell]
 ----
 ansible-navigator run system_setup.yml
 ----
+=====
+======
 
 
-== Task 3 - Verify the new user exists in both nodes
-
-* Once the Ansible Playbook successfully completes, run the following steps to check manually both servers.
+======
+.☑️ Task 3 - Verify the new user exists in both nodes
+[%collapsible]
+=====
+. Once the Ansible Playbook successfully completes, run the following steps to check manually both servers.
 +
 *For node1:*
 +
-[source,cmd]
+[source,shell]
 ----
 ssh node1 id padawan
 ----
@@ -77,14 +88,33 @@ ssh node1 id padawan
 +
 *For node2:*
 +
-[source,cmd]
+[source,shell]
 ----
 ssh node2 id padawan
 ----
+=====
+======
 
 
-== Next Challenge
-Press the `Next` button below to go to the next challenge once you’ve completed the task.
 
-== Encountered an issue?
-If you have encountered an issue or have noticed something not quite right, please open an issue (https://github.com/ansible/instruqt/issues/new?labels=writing-first-playbook&title=Issue+with+Writing+First+Playbook+slug+ID:+14-variables&assignees=leogallego).
+== Embracing the Next Challenge
+======
+.✅ Next Challenge
+[%collapsible]
+=====
+Once you've completed the task, press the *Next* button below to proceed to the next challenge. 
+
+* The blue *Next* button will validate your steps and move you to the next challenge or chapter. If any steps are missing, an error will be produced, allowing you to recheck your steps before clicking the Next button again to continue.
+
+* You also have the option to automatically solve a challenge or chapter by clicking the *Solve* button, which will complete the exercises for you.
+=====
+======
+
+
+======
+.🐛 Encountered an issue?
+[%collapsible]
+=====
+If you have encountered an issue or have noticed something not quite right, TODO
+=====
+======
