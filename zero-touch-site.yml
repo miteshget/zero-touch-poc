@@ -1,8 +1,8 @@
 ---
 site:
-  title: "Zero Touch POC"
+  title: "Writing you first playbook"
   url: https://demo.redhat.com/course-template
-  start_page: modules::01-index.adoc
+  start_page: modules::01-playbook-inventory.adoc
 
 content:
   sources:
@@ -12,11 +12,11 @@ ui:
   bundle:
     url: https://github.com/rhpds/nookbag-bundle/releases/download/v0.0.2/bundle.zip
     snapshot: true
-  supplemental_files:
-    - path: ./content/supplemental-ui
-    - path: .nojekyll
-    - path: ui.yml
-      contents: "static_files: [ .nojekyll ]"
+  # supplemental_files:
+  #   - path: ./content/supplemental-ui
+  #   - path: .nojekyll
+  #   - path: ui.yml
+  #     contents: "static_files: [ .nojekyll ]"
 
 output:
   dir: ./www/www
