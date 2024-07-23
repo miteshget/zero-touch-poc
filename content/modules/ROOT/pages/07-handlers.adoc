@@ -47,7 +47,7 @@ NOTE: In the *VSCode Editor* tab
       notify: Reload Firewall
 ----
 
-. Add the following firewalld task with *notify* at the end of *system_setup.yml* playbook. Remember to check the indentation!
+. Add the following firewalld task with parameter *notify* at the end of *system_setup.yml* playbook. Remember to check the indentation!
 +
 [source,yaml]
 ----
@@ -60,7 +60,7 @@ NOTE: In the *VSCode Editor* tab
       notify: Reload Firewall
 ----
 
-. Add the following *handler* at the end of *system_setup.yml* playbook. Remember to check the indentation!
+. Add the *handler* at the end of *system_setup.yml* playbook as given below. Remember to check the indentation!
 +
 [source,yaml]
 ----

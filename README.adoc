@@ -12,8 +12,6 @@ Zero Touch Writing your first playbook lab
 ├── README.adoc                 # Readme file
 ├── content                     # Content directory
 ├── runtime-automation          # Playbook directory
-├── utilities
-├── www
 ├── zero-touch-config.yml       # Configuration file
 └── zero-touch-site.yml         
 ----
@@ -35,7 +33,6 @@ content/modules/ROOT/
 │       ├── solve.png
 │       ├── tabs.png
 │       └── vscode_inventory.png
-├── nav.adoc
 └── pages                                       # Your content goes here
     ├── 01-playbook-inventory.adoc              # First page of your lab
     ├── 02-playbook-directory-structure.adoc

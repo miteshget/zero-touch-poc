@@ -25,18 +25,19 @@ cd ansible-files
 ansible-navigator run system_setup.yml
 ----
 
-+
+
 IMPORTANT: The playbook task may take a minute or two to complete as it will download the container image and upgrade system packages in the managed node.
 
 
-+
+
 NOTE: *-i hosts* option is not required as the inventory was configured in the *ansible-navigator.yml* settings file.
 
-. The output should not report any errors but provide an overview of the tasks executed and a "PLAY RECAP" summarizing what has been done.
-+
+
+.The output should not report any errors but provide an overview of the tasks executed and a "PLAY RECAP" summarizing what has been done.
+[image]
 image::navigator-output.png[Output, 90%, align="center"]
 
-. There is a built-in task labeled *Gathering Facts* that runs automatically at the beginning of each Ansible play. It collects information about the managed nodes. Upcoming challenges will cover this in more detail.
+NOTE: There is a built-in task labeled *Gathering Facts* that runs automatically at the beginning of each Ansible play. It collects information about the managed nodes. Upcoming challenges will cover this in more detail.
 =====
 ======
 
@@ -70,16 +71,23 @@ ansible-navigator run system_setup.yml
 ----
 
 
-. You will notice the tasks change from *changed* to *ok* including the colors changing from *yellow* to *green*. 
-+
+[NOTE]
+====
+* You will notice the tasks change from *changed* to *ok* including the colors changing from *yellow* to *green*. 
+
 * Additionally, the *"PLAY RECAP"* summary at the end makes it easy to spot the changes made by Ansible.
-* You should see something like this:
-+
+====
+
+.You should see something like this:
+[image]
 image::idem-output.png[Output, 90%, align="center"]
 
-. Why does this happen?
-+
+[NOTE]
+====
+Why does this happen?
+
 * The Ansible Playbook can be run numerous times but only does it make a change the first time due to this being the only time that *node1* does not have the *myuser* user. Once the user is created, Ansible recognizes this and gives a status of *ok* letting us know that it's already there.
+====
 =====
 ======
 

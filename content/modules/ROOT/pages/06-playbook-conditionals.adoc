@@ -120,13 +120,23 @@ This is due to the conditional *when* statement targeting the specific hosts for
 ----
 ssh node1 id padawan
 ----
-
++
+.Output should be similar to this:
+[source,text]
+----
+uid=1003(padawan) gid=1003(padawan) groups=1003(padawan)
+----
 +
 [source,shell]
 ----
 ssh node1 rpm -q httpd
 ----
-
++
+.Output should be similar to this:
+[source,text]
+----
+httpd-2.4.37-56.module+el8.8.0+18556+a66138c1.4.x86_64
+----
 
 . For *node3* (which belongs to the *[database]* group), verify that the user *padawan* exists, but the *httpd* package is missing:
 +
