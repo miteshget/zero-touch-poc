@@ -18,6 +18,65 @@ NOTE: In the *VSCode Editor* tab
 [source,yaml]
 ----
 ---
+    - name: Ensure Apache is running and enabled
+      ansible.builtin.service:
+        name: "{{ apache_service_name }}"
+        state: started
+        enabled: true
+      when: inventory_hostname in groups['web']
+
+    - name: Install firewalld
+      ansible.builtin.dnf:
+        name: firewalld
+        state: present
+      when: inventory_hostname in groups['web']
+
+    - name: Ensure firewalld is running
+      ansible.builtin.service:
+        name: firewalld
+        state: started
+        enabled: true
+      when: inventory_hostname in groups['web']
+
+    - name: Allow HTTP traffic on web servers
+      ansible.posix.firewalld:
+        service: http
+        permanent: true
+        state: enabled
+      when: inventory_hostname in groups['web']
+      notify: Reload Firewall
+----
+
+. Add the following firewalld task with *notify* at the end of *system_setup.yml* playbook. Remember to check the indentation!
++
+[source,yaml]
+----
+    - name: Allow HTTP traffic on web servers
+      ansible.posix.firewalld:
+        service: http
+        permanent: true
+        state: enabled
+      when: inventory_hostname in groups['web']
+      notify: Reload Firewall
+----
+
+. Add the following *handler* at the end of *system_setup.yml* playbook. Remember to check the indentation!
++
+[source,yaml]
+----
+  handlers:
+    - name: Reload Firewall
+      ansible.builtin.service:
+        name: firewalld
+        state: reloaded
+----
+
+[IMPORTANT]
+====
+.💡 The *system_setup.yml* Playbook output output should look like this:
+[source,yaml]
+----
+---
 - name: Basic System Setup
   hosts: all
   become: true
@@ -80,14 +139,16 @@ NOTE: In the *VSCode Editor* tab
         name: firewalld
         state: reloaded
 ----
+====
 
-. Understanding the playbook:
-+
+[NOTE]
+====
+Understanding the playbook:
 * The *notify* section calls the handler only if the "Allow HTTP traffic on web servers" task makes any changes in one of the hosts. That way the service is only reloaded if needed - and not each time the playbook is run.
 
 * The *handlers* section defines a task that is only run on notification. And the *name* field is used to call it from a task.
+====
 
-+
 WARNING: Notice how the *name* of the *handlers* is used within the *notify* section of the "Allow HTTP traffic on web servers" configuration task. This ensures that the proper handler is executed as there can be multiple handlers within an Ansible playbook.
 =====
 ======
@@ -131,10 +192,13 @@ NOTE: In the **Control** tab
 ansible-navigator run system_setup.yml
 ----
 
+[NOTE]
+====
+Notice anything with the output?
 
-. Notice anything with the output?
-+
 * Nothing was changed, thus the playbook ran and you will notice the PLAY RECAP does not show any *changed* lines. The firewall was not restarted as there were no changes.
+====
+
 =====
 ======
 
@@ -167,10 +231,9 @@ curl http://node1 | grep "HTTP Server"
 ----
 curl http://node3 
 ----
-
-
-. The output should look like this:
 +
+[NOTE]
+.The output should look like this:
 [source,textinfo]
 ----
 curl: (7) Failed to connect to node3 port 80: Connection refused
@@ -197,6 +260,6 @@ Once you've completed the task, press the image:next.png[Next, 50] button at the
 .🐛 Encountered an issue?
 [%collapsible]
 =====
-If you have encountered an issue or have noticed something not quite right, TODO
+If you have encountered an issue or have noticed something not quite right, Please open an issue on the https://github.com/redhat-gpte-devopsautomation/zt-writing-your-first-playbook/issues/new?labels=content+error&title=Issue+with+:+07-handlers&assignees=miteshget[Writing your first playbook repository].
 =====
 ======

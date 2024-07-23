@@ -35,13 +35,17 @@ node3
 [%collapsible]
 =====
 
-. We will modify our previous playbook to limit tasks to specific hosts within the *[web]* group.
+[IMPORTANT]
+====
+We will modify our previous playbook to limit tasks to specific hosts within the *[web]* group.
 For this, we will use the *hosts: all* setting in our playbook to target all nodes, but we will be adding a condition with *when:* to some tasks.
+====
 
 . Update your *system_setup.yml* playbook with the changes below, paying attention to the *hosts:* and *when:* lines.
 +
 [source,yaml]
 ----
+---
 - name: Basic System Setup
   hosts: all
   become: true
@@ -159,6 +163,6 @@ Once you've completed the task, press the image:next.png[Next, 50] button at the
 .🐛 Encountered an issue?
 [%collapsible]
 =====
-If you have encountered an issue or have noticed something not quite right, TODO
+If you have encountered an issue or have noticed something not quite right, Please open an issue on the https://github.com/redhat-gpte-devopsautomation/zt-writing-your-first-playbook/issues/new?labels=content+error&title=Issue+with+:+06-playbook-conditionals&assignees=miteshget[Writing your first playbook repository].
 =====
 ======

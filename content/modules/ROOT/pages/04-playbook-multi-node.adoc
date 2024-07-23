@@ -68,9 +68,8 @@ ssh node1 id myuser
 ----
 ssh node2 id myuser
 ----
-
-. Output should be similar to the following:
 +
+.Output should be similar to the following:
 [source,text]
 ----
 uid=1002(myuser) gid=1002(myuser) groups=1002(myuser)
@@ -96,6 +95,6 @@ Once you've completed the task, press the image:next.png[Next, 50] button at the
 .🐛 Encountered an issue?
 [%collapsible]
 =====
-If you have encountered an issue or have noticed something not quite right, TODO
+If you have encountered an issue or have noticed something not quite right, Please open an issue on the https://github.com/redhat-gpte-devopsautomation/zt-writing-your-first-playbook/issues/new?labels=content+error&title=Issue+with+:+04-playbook-multi-node&assignees=miteshget[Writing your first playbook repository].
 =====
 ======

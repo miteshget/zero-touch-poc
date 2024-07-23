@@ -35,7 +35,7 @@ Architecture: {{ ansible_architecture }}
 ----
 
 
-. The template file contains the basic text that will later be copied over to the hosts. It contains variables that will be replaced on the target machines individually. It will dynamically display the hostname, OS distribution, version, and architecture of each managed host.
+NOTE: The template file contains the basic text that will later be copied over to the hosts. It contains variables that will be replaced on the target machines individually. It will dynamically display the hostname, OS distribution, version, and architecture of each managed host.
 =====
 ======
 
@@ -96,16 +96,14 @@ ansible-navigator run system_setup.yml
 ----
 ssh node1
 ----
-
-. You should see a message similar to the one below (RHEL version might vary!)
++
+NOTE: You should see a message similar to the one below (RHEL version might vary!)
 +
 [source,ini]
 ----
 Welcome to node1.
 OS: RedHat 9.2
 Architecture: x86_64
-Register this system with Red Hat Insights: insights-client --register
-Create an account or view all your systems at https://red.ht/insights-dashboard
 ----
 
 . You can now exit *node1* and test the same in *node2* to see the difference:
@@ -120,6 +118,13 @@ exit
 ----
 ssh node2
 ----
+
+. You can now exit *node2*.
++
+[source,shell]
+----
+exit
+---- 
 =====
 ======
 
@@ -220,6 +225,6 @@ Once you've completed the task, press the image:next.png[Next, 50] button at the
 .🐛 Encountered an issue?
 [%collapsible]
 =====
-If you have encountered an issue or have noticed something not quite right, TODO
+If you have encountered an issue or have noticed something not quite right, Please open an issue on the https://github.com/redhat-gpte-devopsautomation/zt-writing-your-first-playbook/issues/new?labels=content+error&title=Issue+with+:+09-playbook-templates&assignees=miteshget[Writing your first playbook repository].
 =====
 ======

@@ -12,9 +12,11 @@ This exercise builds upon previous exercises by guiding you through the creation
 =====
 NOTE: I the **Control** tab
 
-. Ansible looks for roles in a subdirectory called *roles* in the project directory by default. To create a new role, use *ansible-galaxy*.
-+
-NOTE: Ansible Galaxy is your hub for finding, reusing and sharing Ansible content.
+[IMPORTANT]
+====
+* Ansible looks for roles in a subdirectory called *roles* in the project directory by default. To create a new role, use *ansible-galaxy*.
+* Ansible Galaxy is your hub for finding, reusing and sharing Ansible content.
+====
 
 . In the ansible-files create a roles directory.
 +
@@ -101,15 +103,18 @@ apache_service_name: httpd
 .☑️ Task 4 - Edit the roles/apache/tasks/main.yml file
 [%collapsible]
 =====
-. Previously we would include all of our tasks within the Ansible playbook itself. With Ansible Roles, we include the tasks within the roles/apache/tasks/main.yml file. This file only has the tasks and is not a complete playbook.
+[NOTE]
+====
+* Previously we would include all of our tasks within the Ansible playbook itself. With Ansible Roles, we include the tasks within the *roles/apache/tasks/main.yml* file. This file only has the tasks and is not a complete playbook.
 
-. For this challenge, the roles/apache/tasks/main.yml file includes tasks that do the following:
+* For this challenge, the *roles/apache/tasks/main.yml* file includes tasks that do the following:
 +
-.. Make sure httpd is installed
-.. Make sure httpd is started and enabled
-.. Make sure firewalld is installed
-.. Make sure firewalld is started and enabled
-.. Allow HTTPS traffic on web servers
+** Make sure httpd is installed
+** Make sure httpd is started and enabled
+** Make sure firewalld is installed
+** Make sure firewalld is started and enabled
+** Allow HTTPS traffic on web servers
+====
 
 
 . Edit *ansible-files/roles/apache/tasks/main.yml* to include tasks:
@@ -175,7 +180,7 @@ apache_service_name: httpd
 .☑️ Task 6 - Creating an index.html Jinja2 template file
 [%collapsible]
 =====
-. Ansible uses Jinja2 templating to enable dynamic expressions and access to variables and facts. You can use templating with the *template* module. We will use a Jinja2 template to create a custom *index.html*. Let's create the file and store it in the apache role directory:
+NOTE: Ansible uses Jinja2 templating to enable dynamic expressions and access to variables and facts. You can use templating with the *template* module. We will use a Jinja2 template to create a custom *index.html*. Let's create the file and store it in the apache role directory:
 
 . Create  *ansible-files/roles/apache/templates/index.html.j2* with the following content:
 +
@@ -192,7 +197,7 @@ apache_service_name: httpd
 ----
 
 
-. You will notice we are using an Ansible variable in that HTML code above: *{{ ansible_hostname }}*, this will be replaced at runtime by the corresponding value.
+NOTE: You will notice we are using an Ansible variable in that HTML code above: *{{ ansible_hostname }}*, this will be replaced at runtime by the corresponding value.
 =====
 ======
 
@@ -222,7 +227,7 @@ Pay atention to indentation. When pressing enter in VSCode some extra spaces mig
 
 
 ======
-.☑️ Task 6 - Create a new playbook called deploy_apache.yml to use the new *apache* role
+.☑️ Task 8 - Create a new playbook called deploy_apache.yml to use the new *apache* role
 [%collapsible]
 =====
 . Create the *deploy_apache.yml* playbook in the *ansible-files* directory with the following content:
@@ -317,6 +322,6 @@ Once you've completed the task, press the image:end.png[End, 50] button below to
 .🐛 Encountered an issue?
 [%collapsible]
 =====
-If you have encountered an issue or have noticed something not quite right, TODO
+If you have encountered an issue or have noticed something not quite right, Please open an issue on the https://github.com/redhat-gpte-devopsautomation/zt-writing-your-first-playbook/issues/new?labels=content+error&title=Issue+with+:+10-roles&assignees=miteshget[Writing your first playbook repository].
 =====
 ======
